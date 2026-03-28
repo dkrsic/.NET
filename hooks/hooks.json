@@ -4,14 +4,14 @@
         {
             "type": "command",
             "command": "powershell.exe -ExecutionPolicy
-            Bypass -Command \"$input | Add-Content -Path 'C:\\git\\.github\\hooks\\agent_log.txt'\""
+            Bypass -Command \"$input | Add-Content -Path 'C:\\git\\.NET\\hooks\\agent_log.txt'\""
         }
     ],
     "preToolUse":[
         {
             "type": "command",
             "command": "powershell.exe -ExecutionPolicy
-            Bypass -Command \"$input | Add-Content -Path 'C:\\git\\.github\\hooks\\agent_log.txt'\""
+            Bypass -Command \"$input | Add-Content -Path 'C:\\git\\.NET\\hooks\\agent_log.txt'\""
         }
     ]
  }
