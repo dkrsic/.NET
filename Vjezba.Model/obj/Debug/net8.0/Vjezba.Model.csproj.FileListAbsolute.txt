@@ -3,3 +3,10 @@ C:\.NET\Vjezba.Model\obj\Debug\net8.0\Vjezba.Model.AssemblyInfoInputs.cache
 C:\.NET\Vjezba.Model\obj\Debug\net8.0\Vjezba.Model.AssemblyInfo.cs
 C:\.NET\Vjezba.Model\obj\Debug\net8.0\Vjezba.Model.csproj.CoreCompileInputs.cache
 C:\.NET\Vjezba.Model\obj\Debug\net8.0\Vjezba.Model.sourcelink.json
+C:\.NET\Vjezba.Model\bin\Debug\net8.0\Vjezba.Model.deps.json
+C:\.NET\Vjezba.Model\bin\Debug\net8.0\Vjezba.Model.dll
+C:\.NET\Vjezba.Model\bin\Debug\net8.0\Vjezba.Model.pdb
+C:\.NET\Vjezba.Model\obj\Debug\net8.0\Vjezba.Model.dll
+C:\.NET\Vjezba.Model\obj\Debug\net8.0\refint\Vjezba.Model.dll
+C:\.NET\Vjezba.Model\obj\Debug\net8.0\Vjezba.Model.pdb
+C:\.NET\Vjezba.Model\obj\Debug\net8.0\ref\Vjezba.Model.dll
