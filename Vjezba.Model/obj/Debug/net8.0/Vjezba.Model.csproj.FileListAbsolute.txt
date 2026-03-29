@@ -1,0 +1,5 @@
+C:\.NET\Vjezba.Model\obj\Debug\net8.0\Vjezba.Model.GeneratedMSBuildEditorConfig.editorconfig
+C:\.NET\Vjezba.Model\obj\Debug\net8.0\Vjezba.Model.AssemblyInfoInputs.cache
+C:\.NET\Vjezba.Model\obj\Debug\net8.0\Vjezba.Model.AssemblyInfo.cs
+C:\.NET\Vjezba.Model\obj\Debug\net8.0\Vjezba.Model.csproj.CoreCompileInputs.cache
+C:\.NET\Vjezba.Model\obj\Debug\net8.0\Vjezba.Model.sourcelink.json
