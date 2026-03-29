@@ -3,28 +3,31 @@
   "WorkspaceRootPath": "C:\\.NET\\OdrzavanjeVozila\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{0BBD54C2-FF54-41BC-9C7C-65315B9D1791}|..\\Vjezba.ConsoleApp\\Vjezba.ConsoleApp.csproj|c:\\.net\\vjezba.consoleapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{CCB72BED-18A2-4B4E-A785-A55F49BD6974}|..\\Vjezba.Model\\Vjezba.Model.csproj|c:\\.net\\vjezba.model\\klase\\servisninalog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CCB72BED-18A2-4B4E-A785-A55F49BD6974}|..\\Vjezba.Model\\Vjezba.Model.csproj|c:\\.net\\vjezba.model\\klase\\nalogstavka.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CCB72BED-18A2-4B4E-A785-A55F49BD6974}|..\\Vjezba.Model\\Vjezba.Model.csproj|c:\\.net\\vjezba.model\\klase\\dio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CCB72BED-18A2-4B4E-A785-A55F49BD6974}|..\\Vjezba.Model\\Vjezba.Model.csproj|c:\\.net\\vjezba.model\\klase\\automobil.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CCB72BED-18A2-4B4E-A785-A55F49BD6974}|..\\Vjezba.Model\\Vjezba.Model.csproj|c:\\.net\\vjezba.model\\tools\\enums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CCB72BED-18A2-4B4E-A785-A55F49BD6974}|..\\Vjezba.Model\\Vjezba.Model.csproj|c:\\.net\\vjezba.model\\klase\\dio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CCB72BED-18A2-4B4E-A785-A55F49BD6974}|..\\Vjezba.Model\\Vjezba.Model.csproj|c:\\.net\\vjezba.model\\vjezba.model.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CCB72BED-18A2-4B4E-A785-A55F49BD6974}|..\\Vjezba.Model\\Vjezba.Model.csproj|c:\\.net\\vjezba.model\\klase\\radionica.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CCB72BED-18A2-4B4E-A785-A55F49BD6974}|..\\Vjezba.Model\\Vjezba.Model.csproj|c:\\.net\\vjezba.model\\klase\\mehanicar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CCB72BED-18A2-4B4E-A785-A55F49BD6974}|..\\Vjezba.Model\\Vjezba.Model.csproj|c:\\.net\\vjezba.model\\klase\\mehanicar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CCB72BED-18A2-4B4E-A785-A55F49BD6974}|..\\Vjezba.Model\\Vjezba.Model.csproj|c:\\.net\\vjezba.model\\klase\\nalogstavka.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CCB72BED-18A2-4B4E-A785-A55F49BD6974}|..\\Vjezba.Model\\Vjezba.Model.csproj|c:\\.net\\vjezba.model\\tools\\enums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CCB72BED-18A2-4B4E-A785-A55F49BD6974}|..\\Vjezba.Model\\Vjezba.Model.csproj|c:\\.net\\vjezba.model\\klase\\radionica.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CCB72BED-18A2-4B4E-A785-A55F49BD6974}|..\\Vjezba.Model\\Vjezba.Model.csproj|c:\\.net\\vjezba.model\\klase\\korisnik.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -37,7 +40,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -45,7 +48,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\.NET\\Vjezba.ConsoleApp\\Program.cs",
+              "RelativeDocumentMoniker": "..\\Vjezba.ConsoleApp\\Program.cs",
+              "ToolTip": "C:\\.NET\\Vjezba.ConsoleApp\\Program.cs",
+              "RelativeToolTip": "..\\Vjezba.ConsoleApp\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-29T16:24:45.137Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "Enums.cs",
               "DocumentMoniker": "C:\\.NET\\Vjezba.Model\\Tools\\Enums.cs",
               "RelativeDocumentMoniker": "..\\Vjezba.Model\\Tools\\Enums.cs",
@@ -53,12 +69,11 @@
               "RelativeToolTip": "..\\Vjezba.Model\\Tools\\Enums.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAxwA0AAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-29T14:59:02.636Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-29T14:59:02.636Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "Vjezba.Model.csproj",
               "DocumentMoniker": "C:\\.NET\\Vjezba.Model\\Vjezba.Model.csproj",
               "RelativeDocumentMoniker": "..\\Vjezba.Model\\Vjezba.Model.csproj",
@@ -71,7 +86,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "Radionica.cs",
               "DocumentMoniker": "C:\\.NET\\Vjezba.Model\\Klase\\Radionica.cs",
               "RelativeDocumentMoniker": "..\\Vjezba.Model\\Klase\\Radionica.cs",
@@ -83,7 +98,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 5,
               "Title": "Mehanicar.cs",
               "DocumentMoniker": "C:\\.NET\\Vjezba.Model\\Klase\\Mehanicar.cs",
               "RelativeDocumentMoniker": "..\\Vjezba.Model\\Klase\\Mehanicar.cs",
@@ -91,11 +106,12 @@
               "RelativeToolTip": "..\\Vjezba.Model\\Klase\\Mehanicar.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAA0AAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-29T14:56:14.042Z"
+              "WhenOpened": "2026-03-29T14:56:14.042Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Dio.cs",
               "DocumentMoniker": "C:\\.NET\\Vjezba.Model\\Klase\\Dio.cs",
               "RelativeDocumentMoniker": "..\\Vjezba.Model\\Klase\\Dio.cs",
@@ -108,7 +124,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "NalogStavka.cs",
               "DocumentMoniker": "C:\\.NET\\Vjezba.Model\\Klase\\NalogStavka.cs",
               "RelativeDocumentMoniker": "..\\Vjezba.Model\\Klase\\NalogStavka.cs",
@@ -116,25 +132,24 @@
               "RelativeToolTip": "..\\Vjezba.Model\\Klase\\NalogStavka.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-29T14:55:15.051Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-29T14:55:15.051Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "ServisniNalog.cs",
               "DocumentMoniker": "C:\\.NET\\Vjezba.Model\\Klase\\ServisniNalog.cs",
               "RelativeDocumentMoniker": "..\\Vjezba.Model\\Klase\\ServisniNalog.cs",
               "ToolTip": "C:\\.NET\\Vjezba.Model\\Klase\\ServisniNalog.cs",
               "RelativeToolTip": "..\\Vjezba.Model\\Klase\\ServisniNalog.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAA1wAUAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-29T14:53:35.513Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "Automobil.cs",
               "DocumentMoniker": "C:\\.NET\\Vjezba.Model\\Klase\\Automobil.cs",
               "RelativeDocumentMoniker": "..\\Vjezba.Model\\Klase\\Automobil.cs",
@@ -147,7 +162,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "Korisnik.cs",
               "DocumentMoniker": "C:\\.NET\\Vjezba.Model\\Klase\\Korisnik.cs",
               "RelativeDocumentMoniker": "..\\Vjezba.Model\\Klase\\Korisnik.cs",
