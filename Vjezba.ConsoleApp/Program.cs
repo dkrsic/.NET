@@ -26,7 +26,7 @@ class Program
 
         // -- Mehaničari --
         var m1 = new Mehanicar { Id = 1, Ime = "Ivan", Prezime = "Horvat", Specijalizacija = "Motor i mjenjač", DatumZaposlenja = new DateTime(2018, 3, 15), SatnicaEUR = 18.50m, RadionicaId = 1, Radionica = radionica1 };
-        var m2 = new Mehanicar { Id = 2, Ime = "Maja", Prezime = "Kovač", Specijalizacija = "Elektrika i dijag", DatumZaposlenja = new DateTime(2020, 6, 1), SatnicaEUR = 20.00m, RadionicaId = 1, Radionica = radionica1 };
+        var m2 = new Mehanicar { Id = 2, Ime = "Maja", Prezime = "Kovač", Specijalizacija = "Elektrika i dijagnostika", DatumZaposlenja = new DateTime(2020, 6, 1), SatnicaEUR = 20.00m, RadionicaId = 1, Radionica = radionica1 };
         var m3 = new Mehanicar { Id = 3, Ime = "Ante", Prezime = "Marić", Specijalizacija = "Kočnice i ovjes", DatumZaposlenja = new DateTime(2015, 9, 20), SatnicaEUR = 17.00m, RadionicaId = 2, Radionica = radionica2 };
         var m4 = new Mehanicar { Id = 4, Ime = "Petra", Prezime = "Babić", Specijalizacija = "Klimatizacija", DatumZaposlenja = new DateTime(2022, 1, 10), SatnicaEUR = 16.00m, RadionicaId = 3, Radionica = radionica3 };
 
