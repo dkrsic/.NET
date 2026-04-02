@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Vjezba.ConsoleApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+65dfd361c10e12d32a62c9d41899b732420aaa22")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+594fb77435e07f920e57aabe819042ac4ebf1195")]
 [assembly: System.Reflection.AssemblyProductAttribute("Vjezba.ConsoleApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Vjezba.ConsoleApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
