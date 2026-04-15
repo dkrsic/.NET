@@ -1,0 +1,72 @@
+@model OdrzavanjeVozila.Klase.Mehanicar
+@{
+    ViewData["Title"] = "Detalji mehaničara";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb app-breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Početna</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Mehanicar" asp-action="Index">Mehaničari</a></li>
+        <li class="breadcrumb-item active">@Model.PunoIme</li>
+    </ol>
+</nav>
+
+<section class="entity-shell">
+    <div class="entity-head">
+        <h2>@Model.PunoIme</h2>
+    </div>
+
+    <div class="detail-card mb-4">
+        <dl class="row mb-0">
+            <dt class="col-sm-4">Specijalizacija</dt>
+            <dd class="col-sm-8">@Model.Specijalizacija</dd>
+            <dt class="col-sm-4">Radionica</dt>
+            <dd class="col-sm-8">
+                @if (Model.Radionica != null)
+                {
+                    <a asp-controller="Radionica" asp-action="Details" asp-route-id="@Model.RadionicaId">@Model.Radionica.Naziv</a>
+                }
+            </dd>
+            <dt class="col-sm-4">Satnica</dt>
+            <dd class="col-sm-8">@Model.SatnicaEUR.ToString("N2") €/h</dd>
+            <dt class="col-sm-4">Datum zaposlenja</dt>
+            <dd class="col-sm-8">@Model.DatumZaposlenja.ToString("dd.MM.yyyy")</dd>
+        </dl>
+    </div>
+
+    <h4 class="mb-3">Servisni nalozi</h4>
+    @if (Model.Nalozi != null && Model.Nalozi.Any())
+    {
+        <div class="table-responsive glass-table">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>Datum</th>
+                        <th>Vozilo</th>
+                        <th>Status</th>
+                        <th>Cijena</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var nalog in Model.Nalozi)
+                    {
+                        <tr>
+                            <td>@nalog.DatumOtvaranja.ToString("dd.MM.yyyy")</td>
+                            <td>@(nalog.Automobil?.Naziv ?? "-")</td>
+                            <td>@nalog.Status</td>
+                            <td>@nalog.UkupnaCijena.ToString("N2") €</td>
+                            <td>
+                                <a asp-controller="ServisniNalog" asp-action="Details" asp-route-id="@nalog.Id">Detalji</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <p class="text-secondary mb-0">Nema servisnih naloga za ovog mehaničara.</p>
+    }
+</section>

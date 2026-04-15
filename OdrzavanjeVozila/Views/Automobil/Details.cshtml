@@ -1,0 +1,78 @@
+@model OdrzavanjeVozila.Klase.Automobil
+@{
+    ViewData["Title"] = "Detalji automobila";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb app-breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Početna</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Automobil" asp-action="Index">Automobili</a></li>
+        <li class="breadcrumb-item active">@Model.Naziv</li>
+    </ol>
+</nav>
+
+<section class="entity-shell">
+    <div class="entity-head">
+        <h2>@Model.Naziv</h2>
+    </div>
+
+    <div class="detail-card mb-4">
+        <dl class="row mb-0">
+            <dt class="col-sm-4">Registracijski broj</dt>
+            <dd class="col-sm-8">@Model.RegistracijskiBroj</dd>
+            <dt class="col-sm-4">Broj šasije</dt>
+            <dd class="col-sm-8">@Model.BrojSasije</dd>
+            <dt class="col-sm-4">Trenutna kilometraža</dt>
+            <dd class="col-sm-8">@Model.TrenutnaKilometraza.ToString("N0") km</dd>
+            <dt class="col-sm-4">Vrsta pogona</dt>
+            <dd class="col-sm-8">@Model.VrstaPogona</dd>
+            <dt class="col-sm-4">Datum prvog servisa</dt>
+            <dd class="col-sm-8">@Model.DatumPrvogServisa.ToString("dd.MM.yyyy")</dd>
+            <dt class="col-sm-4">Vlasnik</dt>
+            <dd class="col-sm-8">
+                @if (Model.Korisnik != null)
+                {
+                    <a asp-controller="Korisnik" asp-action="Details" asp-route-id="@Model.KorisnikId">@Model.Korisnik.PunoIme</a>
+                }
+            </dd>
+        </dl>
+    </div>
+
+    <h4 class="mb-3">Povijest servisa</h4>
+    @if (Model.ServisniNalozi != null && Model.ServisniNalozi.Any())
+    {
+        <div class="table-responsive glass-table">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>Datum</th>
+                        <th>Opis</th>
+                        <th>Status</th>
+                        <th>Km pri servisu</th>
+                        <th>Cijena</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var nalog in Model.ServisniNalozi)
+                    {
+                        <tr>
+                            <td>@nalog.DatumOtvaranja.ToString("dd.MM.yyyy")</td>
+                            <td>@nalog.OpisRadova</td>
+                            <td>@nalog.Status</td>
+                            <td>@nalog.KilometrazaPrilikomServisa.ToString("N0") km</td>
+                            <td>@nalog.UkupnaCijena.ToString("N2") €</td>
+                            <td>
+                                <a asp-controller="ServisniNalog" asp-action="Details" asp-route-id="@nalog.Id">Detalji</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <p class="text-secondary mb-0">Nema servisnih naloga za ovo vozilo.</p>
+    }
+</section>

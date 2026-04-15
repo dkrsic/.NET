@@ -1,0 +1,54 @@
+@model List<OdrzavanjeVozila.Klase.ServisniNalog>
+@{
+    ViewData["Title"] = "Servisni nalozi";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb app-breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Početna</a></li>
+        <li class="breadcrumb-item active">Servisni nalozi</li>
+    </ol>
+</nav>
+
+<section class="entity-shell">
+    <div class="entity-head">
+        <h2>Servisni nalozi</h2>
+    </div>
+    <div class="table-responsive glass-table">
+        <table class="table table-hover align-middle mb-0">
+            <thead>
+                <tr>
+                    <th>Datum</th>
+                    <th>Vozilo</th>
+                    <th>Mehaničar</th>
+                    <th>Status</th>
+                    <th>Cijena</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var nalog in Model)
+                {
+                    var statusText = nalog.Status.ToString();
+                    var statusKey = statusText.ToLowerInvariant();
+                    var statusClass = statusKey.Contains("zavr") || statusKey.Contains("dovr")
+                        ? "status-done"
+                        : statusKey.Contains("otvor") || statusKey.Contains("tijek")
+                            ? "status-progress"
+                            : "status-wait";
+
+                    <tr>
+                        <td>@nalog.DatumOtvaranja.ToString("dd.MM.yyyy")</td>
+                        <td>@(nalog.Automobil?.Naziv ?? "-")</td>
+                        <td>@(nalog.Mehanicar?.PunoIme ?? "-")</td>
+                        <td><span class="status-chip @statusClass">@statusText</span></td>
+                        <td>@nalog.UkupnaCijena.ToString("N2") €</td>
+                        <td>
+                            <a asp-controller="ServisniNalog" asp-action="Details" asp-route-id="@nalog.Id">Detalji</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>

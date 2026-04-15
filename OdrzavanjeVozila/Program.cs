@@ -1,8 +1,15 @@
+using OdrzavanjeVozila.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddSingleton<KorisnikMockRepository>();
+builder.Services.AddSingleton<AutomobilMockRepository>();
+builder.Services.AddSingleton<MehanicarMockRepository>();
+builder.Services.AddSingleton<RadionicaMockRepository>();
+builder.Services.AddSingleton<DioMockRepository>();
+builder.Services.AddSingleton<ServisniNalogMockRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

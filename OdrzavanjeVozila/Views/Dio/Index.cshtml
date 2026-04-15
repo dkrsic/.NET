@@ -1,0 +1,54 @@
+@model List<OdrzavanjeVozila.Klase.Dio>
+@{
+    ViewData["Title"] = "Dijelovi";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb app-breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Početna</a></li>
+        <li class="breadcrumb-item active">Dijelovi</li>
+    </ol>
+</nav>
+
+<section class="entity-shell">
+    <div class="entity-head">
+        <h2>Skladište dijelova</h2>
+    </div>
+    <div class="table-responsive glass-table">
+        <table class="table table-hover align-middle mb-0">
+            <thead>
+                <tr>
+                    <th>Naziv</th>
+                    <th>Katalog br.</th>
+                    <th>Proizvođač</th>
+                    <th>Kategorija</th>
+                    <th>Cijena</th>
+                    <th>Na skladištu</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var dio in Model)
+                {
+                    var stockClass = dio.KolicinaNaSkladistu <= 0
+                        ? "stock-empty"
+                        : dio.KolicinaNaSkladistu < 5
+                            ? "stock-low"
+                            : "stock-good";
+
+                    <tr>
+                        <td>@dio.Naziv</td>
+                        <td>@dio.KatalogBroj</td>
+                        <td>@dio.Proizvodac</td>
+                        <td>@dio.Kategorija</td>
+                        <td>@dio.Cijena.ToString("N2") €</td>
+                        <td><span class="stock-chip @stockClass">@dio.KolicinaNaSkladistu kom</span></td>
+                        <td>
+                            <a asp-controller="Dio" asp-action="Details" asp-route-id="@dio.Id">Detalji</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>

@@ -1,0 +1,63 @@
+@model OdrzavanjeVozila.Klase.Radionica
+@{
+    ViewData["Title"] = "Detalji radionice";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb app-breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Početna</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Radionica" asp-action="Index">Radionice</a></li>
+        <li class="breadcrumb-item active">@Model.Naziv</li>
+    </ol>
+</nav>
+
+<section class="entity-shell">
+    <div class="entity-head">
+        <h2>@Model.Naziv</h2>
+    </div>
+
+    <div class="detail-card mb-4">
+        <dl class="row mb-0">
+            <dt class="col-sm-4">Adresa</dt>
+            <dd class="col-sm-8">@Model.Adresa</dd>
+            <dt class="col-sm-4">Telefon</dt>
+            <dd class="col-sm-8">@Model.Telefon</dd>
+            <dt class="col-sm-4">Email</dt>
+            <dd class="col-sm-8">@Model.Email</dd>
+        </dl>
+    </div>
+
+    <h4 class="mb-3">Mehaničari</h4>
+    @if (Model.Mehanicari != null && Model.Mehanicari.Any())
+    {
+        <div class="table-responsive glass-table">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>Ime i prezime</th>
+                        <th>Specijalizacija</th>
+                        <th>Satnica</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var mehanicar in Model.Mehanicari)
+                    {
+                        <tr>
+                            <td>@mehanicar.PunoIme</td>
+                            <td>@mehanicar.Specijalizacija</td>
+                            <td>@mehanicar.SatnicaEUR.ToString("N2") €/h</td>
+                            <td>
+                                <a asp-controller="Mehanicar" asp-action="Details" asp-route-id="@mehanicar.Id">Detalji</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <p class="text-secondary mb-0">Nema mehaničara u ovoj radionici.</p>
+    }
+</section>

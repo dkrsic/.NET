@@ -1,0 +1,44 @@
+@model List<OdrzavanjeVozila.Klase.Radionica>
+@{
+    ViewData["Title"] = "Radionice";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb app-breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Početna</a></li>
+        <li class="breadcrumb-item active">Radionice</li>
+    </ol>
+</nav>
+
+<section class="entity-shell">
+    <div class="entity-head">
+        <h2>Popis radionica</h2>
+    </div>
+    <div class="table-responsive glass-table">
+        <table class="table table-hover align-middle mb-0">
+            <thead>
+                <tr>
+                    <th>Naziv</th>
+                    <th>Adresa</th>
+                    <th>Telefon</th>
+                    <th>Email</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var radionica in Model)
+                {
+                    <tr>
+                        <td>@radionica.Naziv</td>
+                        <td>@radionica.Adresa</td>
+                        <td>@radionica.Telefon</td>
+                        <td>@radionica.Email</td>
+                        <td>
+                            <a asp-controller="Radionica" asp-action="Details" asp-route-id="@radionica.Id">Detalji</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>

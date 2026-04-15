@@ -1,0 +1,46 @@
+@model List<OdrzavanjeVozila.Klase.Mehanicar>
+@{
+    ViewData["Title"] = "Mehaničari";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb app-breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Početna</a></li>
+        <li class="breadcrumb-item active">Mehaničari</li>
+    </ol>
+</nav>
+
+<section class="entity-shell">
+    <div class="entity-head">
+        <h2>Popis mehaničara</h2>
+    </div>
+    <div class="table-responsive glass-table">
+        <table class="table table-hover align-middle mb-0">
+            <thead>
+                <tr>
+                    <th>Ime i prezime</th>
+                    <th>Specijalizacija</th>
+                    <th>Radionica</th>
+                    <th>Satnica</th>
+                    <th>Zaposlen od</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var mehanicar in Model)
+                {
+                    <tr>
+                        <td>@mehanicar.PunoIme</td>
+                        <td>@mehanicar.Specijalizacija</td>
+                        <td>@(mehanicar.Radionica?.Naziv ?? "-")</td>
+                        <td>@mehanicar.SatnicaEUR.ToString("N2") €/h</td>
+                        <td>@mehanicar.DatumZaposlenja.ToString("dd.MM.yyyy")</td>
+                        <td>
+                            <a asp-controller="Mehanicar" asp-action="Details" asp-route-id="@mehanicar.Id">Detalji</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>

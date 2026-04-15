@@ -1,0 +1,46 @@
+@model List<OdrzavanjeVozila.Klase.Korisnik>
+@{
+    ViewData["Title"] = "Korisnici";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb app-breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Početna</a></li>
+        <li class="breadcrumb-item active">Korisnici</li>
+    </ol>
+</nav>
+
+<section class="entity-shell">
+    <div class="entity-head">
+        <h2>Popis korisnika</h2>
+    </div>
+    <div class="table-responsive glass-table">
+        <table class="table table-hover align-middle mb-0">
+            <thead>
+                <tr>
+                    <th>Ime i prezime</th>
+                    <th>Email</th>
+                    <th>Telefon</th>
+                    <th>Adresa</th>
+                    <th>Datum registracije</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var korisnik in Model)
+                {
+                    <tr>
+                        <td>@korisnik.PunoIme</td>
+                        <td>@korisnik.Email</td>
+                        <td>@korisnik.Telefon</td>
+                        <td>@korisnik.Adresa</td>
+                        <td>@korisnik.DatumRegistracije.ToString("dd.MM.yyyy")</td>
+                        <td>
+                            <a asp-controller="Korisnik" asp-action="Details" asp-route-id="@korisnik.Id">Detalji</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>

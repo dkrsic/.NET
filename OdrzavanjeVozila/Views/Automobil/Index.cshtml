@@ -1,0 +1,46 @@
+@model List<OdrzavanjeVozila.Klase.Automobil>
+@{
+    ViewData["Title"] = "Automobili";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb app-breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Početna</a></li>
+        <li class="breadcrumb-item active">Automobili</li>
+    </ol>
+</nav>
+
+<section class="entity-shell">
+    <div class="entity-head">
+        <h2>Popis automobila</h2>
+    </div>
+    <div class="table-responsive glass-table">
+        <table class="table table-hover align-middle mb-0">
+            <thead>
+                <tr>
+                    <th>Vozilo</th>
+                    <th>Registracija</th>
+                    <th>Kilometraža</th>
+                    <th>Pogon</th>
+                    <th>Vlasnik</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var auto in Model)
+                {
+                    <tr>
+                        <td>@auto.Naziv</td>
+                        <td>@auto.RegistracijskiBroj</td>
+                        <td>@auto.TrenutnaKilometraza.ToString("N0") km</td>
+                        <td>@auto.VrstaPogona</td>
+                        <td>@(auto.Korisnik?.PunoIme ?? "-")</td>
+                        <td>
+                            <a asp-controller="Automobil" asp-action="Details" asp-route-id="@auto.Id">Detalji</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>

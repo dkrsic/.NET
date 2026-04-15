@@ -1,6 +1,75 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "Pravila privatnosti";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb app-breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Početna</a></li>
+        <li class="breadcrumb-item active">Pravila privatnosti</li>
+    </ol>
+</nav>
+
+<section class="entity-shell">
+    <div class="entity-head">
+        <h2>Pravila privatnosti</h2>
+    </div>
+
+    <div class="detail-card mb-3">
+        <p class="mb-2">
+            Ova aplikacija služi za vođenje podataka o održavanju vozila i obradu servisnih naloga.
+            Podaci se koriste isključivo za poslovne potrebe servisa i administraciju korisničkih zapisa.
+        </p>
+        <p class="text-secondary mb-0">
+            Zadnje ažuriranje: 15.04.2026.
+        </p>
+    </div>
+
+    <div class="row g-3">
+        <div class="col-12 col-lg-6">
+            <div class="detail-card h-100">
+                <h5 class="mb-3">Koje podatke prikupljamo</h5>
+                <ul class="mb-0">
+                    <li>Osnovni podaci korisnika: ime, kontakt, adresa.</li>
+                    <li>Podaci o vozilu: registracija, šasija, kilometraža, vrsta pogona.</li>
+                    <li>Podaci o servisu: opis radova, ugrađeni dijelovi, status i cijena.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-12 col-lg-6">
+            <div class="detail-card h-100">
+                <h5 class="mb-3">Zašto obrađujemo podatke</h5>
+                <ul class="mb-0">
+                    <li>Praćenje servisne povijesti vozila.</li>
+                    <li>Izrada i upravljanje servisnim nalozima.</li>
+                    <li>Komunikacija s korisnicima vezano uz servis.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-12 col-lg-6">
+            <div class="detail-card h-100">
+                <h5 class="mb-3">Čuvanje i sigurnost</h5>
+                <ul class="mb-0">
+                    <li>Pristup podacima imaju samo ovlaštene osobe.</li>
+                    <li>Podaci se čuvaju onoliko dugo koliko je potrebno za poslovnu evidenciju.</li>
+                    <li>Preporučuje se redovita sigurnosna kopija i kontrola pristupa.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-12 col-lg-6">
+            <div class="detail-card h-100">
+                <h5 class="mb-3">Vaša prava</h5>
+                <ul class="mb-0">
+                    <li>Uvid u pohranjene osobne podatke.</li>
+                    <li>Ispravak netočnih ili zastarjelih podataka.</li>
+                    <li>Zahtjev za brisanje podataka kada je to primjenjivo.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="detail-card mt-3">
+        <h5 class="mb-2">Kontakt</h5>
+        <p class="mb-1">Za pitanja vezana uz privatnost obratite se administratoru sustava.</p>
+        <p class="mb-0 text-secondary">Email: privacy@odrzavanjevozila.local</p>
+    </div>
+</section>

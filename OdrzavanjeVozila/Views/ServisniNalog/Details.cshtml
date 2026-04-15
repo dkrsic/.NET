@@ -1,0 +1,91 @@
+@model OdrzavanjeVozila.Klase.ServisniNalog
+@{
+    ViewData["Title"] = "Detalji naloga";
+    var statusText = Model.Status.ToString();
+    var statusKey = statusText.ToLowerInvariant();
+    var statusClass = statusKey.Contains("zavr") || statusKey.Contains("dovr")
+        ? "status-done"
+        : statusKey.Contains("otvor") || statusKey.Contains("tijek")
+            ? "status-progress"
+            : "status-wait";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb app-breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Početna</a></li>
+        <li class="breadcrumb-item"><a asp-controller="ServisniNalog" asp-action="Index">Servisni nalozi</a></li>
+        <li class="breadcrumb-item active">Nalog #@Model.Id</li>
+    </ol>
+</nav>
+
+<section class="entity-shell">
+    <div class="entity-head">
+        <h2>Servisni nalog #@Model.Id</h2>
+        <span class="status-chip @statusClass">@statusText</span>
+    </div>
+
+    <div class="detail-card mb-4">
+        <dl class="row mb-0">
+            <dt class="col-sm-4">Vozilo</dt>
+            <dd class="col-sm-8">
+                @if (Model.Automobil != null)
+                {
+                    <a asp-controller="Automobil" asp-action="Details" asp-route-id="@Model.AutomobilId">@Model.Automobil.Naziv</a>
+                }
+            </dd>
+            <dt class="col-sm-4">Mehaničar</dt>
+            <dd class="col-sm-8">
+                @if (Model.Mehanicar != null)
+                {
+                    <a asp-controller="Mehanicar" asp-action="Details" asp-route-id="@Model.MehanicarId">@Model.Mehanicar.PunoIme</a>
+                }
+            </dd>
+            <dt class="col-sm-4">Datum otvaranja</dt>
+            <dd class="col-sm-8">@Model.DatumOtvaranja.ToString("dd.MM.yyyy")</dd>
+            <dt class="col-sm-4">Datum zatvaranja</dt>
+            <dd class="col-sm-8">@(Model.DatumZatvaranja?.ToString("dd.MM.yyyy") ?? "Još otvoren")</dd>
+            <dt class="col-sm-4">Status</dt>
+            <dd class="col-sm-8"><span class="status-chip @statusClass">@statusText</span></dd>
+            <dt class="col-sm-4">Kilometraža pri servisu</dt>
+            <dd class="col-sm-8">@Model.KilometrazaPrilikomServisa.ToString("N0") km</dd>
+            <dt class="col-sm-4">Opis radova</dt>
+            <dd class="col-sm-8">@Model.OpisRadova</dd>
+            <dt class="col-sm-4">Napomena</dt>
+            <dd class="col-sm-8">@(Model.Napomena ?? "-")</dd>
+            <dt class="col-sm-4">Sljedeći preporučeni pregled</dt>
+            <dd class="col-sm-8">@(Model.SljedecaPreporucenaPregleda?.ToString("dd.MM.yyyy") ?? "-")</dd>
+            <dt class="col-sm-4">Ukupna cijena</dt>
+            <dd class="col-sm-8"><strong>@Model.UkupnaCijena.ToString("N2") €</strong></dd>
+        </dl>
+    </div>
+
+    @if (Model.Stavke != null && Model.Stavke.Any())
+    {
+        <h4 class="mb-3">Ugrađeni dijelovi</h4>
+        <div class="table-responsive glass-table">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>Dio</th>
+                        <th>Količina</th>
+                        <th>Cijena/kom</th>
+                        <th>Ukupno</th>
+                        <th>Napomena</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var stavka in Model.Stavke)
+                    {
+                        <tr>
+                            <td>@(stavka.Dio?.Naziv ?? $"Dio #{stavka.DioId}")</td>
+                            <td>@stavka.Kolicina</td>
+                            <td>@stavka.CijenaKomad.ToString("N2") €</td>
+                            <td>@stavka.UkupnaCijenaStavke.ToString("N2") €</td>
+                            <td>@(stavka.Napomena ?? "-")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</section>

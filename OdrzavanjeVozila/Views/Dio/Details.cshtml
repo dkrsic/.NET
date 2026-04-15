@@ -1,0 +1,40 @@
+@model OdrzavanjeVozila.Klase.Dio
+@{
+    ViewData["Title"] = "Detalji dijela";
+    var stockClass = Model.KolicinaNaSkladistu <= 0
+        ? "stock-empty"
+        : Model.KolicinaNaSkladistu < 5
+            ? "stock-low"
+            : "stock-good";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb app-breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Početna</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Dio" asp-action="Index">Dijelovi</a></li>
+        <li class="breadcrumb-item active">@Model.Naziv</li>
+    </ol>
+</nav>
+
+<section class="entity-shell">
+    <div class="entity-head">
+        <h2>@Model.Naziv</h2>
+    </div>
+
+    <div class="detail-card">
+        <dl class="row mb-0">
+            <dt class="col-sm-4">Katalog broj</dt>
+            <dd class="col-sm-8">@Model.KatalogBroj</dd>
+            <dt class="col-sm-4">Proizvođač</dt>
+            <dd class="col-sm-8">@Model.Proizvodac</dd>
+            <dt class="col-sm-4">Kategorija</dt>
+            <dd class="col-sm-8">@Model.Kategorija</dd>
+            <dt class="col-sm-4">Cijena</dt>
+            <dd class="col-sm-8">@Model.Cijena.ToString("N2") €</dd>
+            <dt class="col-sm-4">Količina na skladištu</dt>
+            <dd class="col-sm-8"><span class="stock-chip @stockClass">@Model.KolicinaNaSkladistu kom</span></dd>
+            <dt class="col-sm-4">Opis</dt>
+            <dd class="col-sm-8">@Model.Opis</dd>
+        </dl>
+    </div>
+</section>

@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.37027.9
+# Visual Studio Version 18
+VisualStudioVersion = 18.4.11626.88 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OdrzavanjeVozila", "OdrzavanjeVozila.csproj", "{DD7A4D53-747B-4FCB-A118-1FCF2001B662}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vjezba.Model", "..\Vjezba.Model\Vjezba.Model.csproj", "{CCB72BED-18A2-4B4E-A785-A55F49BD6974}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vjezba.ConsoleApp", "..\Vjezba.ConsoleApp\Vjezba.ConsoleApp.csproj", "{0BBD54C2-FF54-41BC-9C7C-65315B9D1791}"
 EndProject
@@ -19,10 +17,6 @@ Global
 		{DD7A4D53-747B-4FCB-A118-1FCF2001B662}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD7A4D53-747B-4FCB-A118-1FCF2001B662}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD7A4D53-747B-4FCB-A118-1FCF2001B662}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CCB72BED-18A2-4B4E-A785-A55F49BD6974}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CCB72BED-18A2-4B4E-A785-A55F49BD6974}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CCB72BED-18A2-4B4E-A785-A55F49BD6974}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CCB72BED-18A2-4B4E-A785-A55F49BD6974}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0BBD54C2-FF54-41BC-9C7C-65315B9D1791}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0BBD54C2-FF54-41BC-9C7C-65315B9D1791}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BBD54C2-FF54-41BC-9C7C-65315B9D1791}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -4,39 +4,60 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - OdrzavanjeVozila</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/OdrzavanjeVozila.styles.css" asp-append-version="true" />
 </head>
 <body>
+    @{ 
+        var currentController = (ViewContext.RouteData.Values["controller"]?.ToString() ?? string.Empty).ToLowerInvariant();
+    }
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">OdrzavanjeVozila</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+        <nav class="navbar navbar-expand-lg app-navbar">
+            <div class="container-xl">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Odrzavanje<span>Vozila</span></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#appNavbar" aria-controls="appNavbar"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="navbar-collapse collapse justify-content-between" id="appNavbar">
+                    <ul class="navbar-nav flex-wrap gap-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link @(currentController == "home" ? "active" : "")" asp-controller="Home" asp-action="Index">Početna</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link @(currentController == "korisnik" ? "active" : "")" asp-controller="Korisnik" asp-action="Index">Korisnici</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentController == "automobil" ? "active" : "")" asp-controller="Automobil" asp-action="Index">Automobili</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentController == "servisninalog" ? "active" : "")" asp-controller="ServisniNalog" asp-action="Index">Servisni nalozi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentController == "mehanicar" ? "active" : "")" asp-controller="Mehanicar" asp-action="Index">Mehaničari</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentController == "radionica" ? "active" : "")" asp-controller="Radionica" asp-action="Index">Radionice</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentController == "dio" ? "active" : "")" asp-controller="Dio" asp-action="Index">Dijelovi</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container-xl app-page">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="footer app-footer">
         <div class="container">
             &copy; 2026 - OdrzavanjeVozila - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>

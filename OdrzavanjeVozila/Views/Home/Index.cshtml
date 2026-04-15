@@ -1,8 +1,56 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "AutoServis — Upravljački centar";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="entity-shell">
+    <div class="entity-head">
+        <h2>AutoServis</h2>
+    </div>
+    <p class="text-secondary mb-3">Upravljački centar za servisiranje i održavanje vozila.</p>
+
+    <div class="home-stats">
+        <div class="stat-pill">@ViewData["StatUsersVehicles"]</div>
+        <div class="stat-pill">@ViewData["StatOrders"]</div>
+        <div class="stat-pill">@ViewData["StatTeam"]</div>
+        <div class="stat-pill">@ViewData["StatStock"]</div>
+    </div>
+
+    <div class="row g-3 stagger-group">
+        <div class="col-12 col-md-6 col-xl-4">
+            <a asp-controller="Korisnik" asp-action="Index" class="detail-card d-block text-decoration-none">
+                <h5 class="mb-1">Korisnici</h5>
+                <p class="text-secondary mb-0">Pregled i upravljanje korisnicima.</p>
+            </a>
+        </div>
+        <div class="col-12 col-md-6 col-xl-4">
+            <a asp-controller="Automobil" asp-action="Index" class="detail-card d-block text-decoration-none">
+                <h5 class="mb-1">Automobili</h5>
+                <p class="text-secondary mb-0">Registrirana vozila i servisna povijest.</p>
+            </a>
+        </div>
+        <div class="col-12 col-md-6 col-xl-4">
+            <a asp-controller="ServisniNalog" asp-action="Index" class="detail-card d-block text-decoration-none">
+                <h5 class="mb-1">Servisni nalozi</h5>
+                <p class="text-secondary mb-0">Aktivni i završeni nalozi.</p>
+            </a>
+        </div>
+        <div class="col-12 col-md-6 col-xl-4">
+            <a asp-controller="Mehanicar" asp-action="Index" class="detail-card d-block text-decoration-none">
+                <h5 class="mb-1">Mehaničari</h5>
+                <p class="text-secondary mb-0">Pregled tima i specijalizacija.</p>
+            </a>
+        </div>
+        <div class="col-12 col-md-6 col-xl-4">
+            <a asp-controller="Radionica" asp-action="Index" class="detail-card d-block text-decoration-none">
+                <h5 class="mb-1">Radionice</h5>
+                <p class="text-secondary mb-0">Lokacije i resursi radionica.</p>
+            </a>
+        </div>
+        <div class="col-12 col-md-6 col-xl-4">
+            <a asp-controller="Dio" asp-action="Index" class="detail-card d-block text-decoration-none">
+                <h5 class="mb-1">Dijelovi</h5>
+                <p class="text-secondary mb-0">Skladište i dostupnost dijelova.</p>
+            </a>
+        </div>
+    </div>
+</section>

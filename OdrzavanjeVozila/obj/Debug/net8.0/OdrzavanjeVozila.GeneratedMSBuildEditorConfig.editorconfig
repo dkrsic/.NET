@@ -22,12 +22,60 @@ build_property._RazorSourceGeneratorDebug =
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Automobil/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0b21vYmlsXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Automobil/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0b21vYmlsXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Dio/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlvXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Dio/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlvXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Korisnik/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS29yaXNuaWtcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Korisnik/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS29yaXNuaWtcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Mehanicar/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVoYW5pY2FyXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Mehanicar/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVoYW5pY2FyXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Radionica/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFkaW9uaWNhXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Radionica/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFkaW9uaWNhXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/ServisniNalog/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmlzbmlOYWxvZ1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/ServisniNalog/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmlzbmlOYWxvZ1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Shared/Error.cshtml]

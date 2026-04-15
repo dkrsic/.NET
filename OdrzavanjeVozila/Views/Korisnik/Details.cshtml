@@ -1,0 +1,67 @@
+@model OdrzavanjeVozila.Klase.Korisnik
+@{
+    ViewData["Title"] = "Detalji korisnika";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb app-breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Početna</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Korisnik" asp-action="Index">Korisnici</a></li>
+        <li class="breadcrumb-item active">@Model.PunoIme</li>
+    </ol>
+</nav>
+
+<section class="entity-shell">
+    <div class="entity-head">
+        <h2>@Model.PunoIme</h2>
+    </div>
+
+    <div class="detail-card mb-4">
+        <dl class="row mb-0">
+            <dt class="col-sm-4">Email</dt>
+            <dd class="col-sm-8">@Model.Email</dd>
+            <dt class="col-sm-4">Telefon</dt>
+            <dd class="col-sm-8">@Model.Telefon</dd>
+            <dt class="col-sm-4">Adresa</dt>
+            <dd class="col-sm-8">@Model.Adresa</dd>
+            <dt class="col-sm-4">Datum registracije</dt>
+            <dd class="col-sm-8">@Model.DatumRegistracije.ToString("dd.MM.yyyy")</dd>
+        </dl>
+    </div>
+
+    <h4 class="mb-3">Vozila korisnika</h4>
+    @if (Model.Vozila != null && Model.Vozila.Any())
+    {
+        <div class="table-responsive glass-table">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>Vozilo</th>
+                        <th>Registracija</th>
+                        <th>Kilometraža</th>
+                        <th>Pogon</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var vozilo in Model.Vozila)
+                    {
+                        <tr>
+                            <td>@vozilo.Naziv</td>
+                            <td>@vozilo.RegistracijskiBroj</td>
+                            <td>@vozilo.TrenutnaKilometraza.ToString("N0") km</td>
+                            <td>@vozilo.VrstaPogona</td>
+                            <td>
+                                <a asp-controller="Automobil" asp-action="Details" asp-route-id="@vozilo.Id">Detalji</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <p class="text-secondary mb-0">Ovaj korisnik nema registriranih vozila.</p>
+    }
+</section>
