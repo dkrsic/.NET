@@ -1,9 +1,11 @@
 ﻿using OdrzavanjeVozila.Tools;
+using System.ComponentModel.DataAnnotations;
 
 namespace OdrzavanjeVozila.Klase
 {
     public class Dio
     {
+        [Key]
         public int Id { get; set; }
         public string Naziv { get; set; }
         public string KatalogBroj { get; set; }
@@ -13,8 +15,8 @@ namespace OdrzavanjeVozila.Klase
         public int KolicinaNaSkladistu { get; set; }
         public string Opis { get; set; }
 
-      
-        public List<NalogStavka> Stavke { get; set; }
+        // 1-N relationship
+        public virtual ICollection<NalogStavka> Stavke { get; set; }
 
         public Dio()
         {

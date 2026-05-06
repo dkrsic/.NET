@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Vjezba.ConsoleApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+74a71ef4203ee9add685a7cbc79b787b4e74b717")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0c690e5339d485e57ed7f3a132f807a2f375e477")]
 [assembly: System.Reflection.AssemblyProductAttribute("Vjezba.ConsoleApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Vjezba.ConsoleApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
