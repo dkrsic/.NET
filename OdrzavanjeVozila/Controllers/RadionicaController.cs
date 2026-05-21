@@ -72,6 +72,8 @@ namespace OdrzavanjeVozila.Controllers
             _ctx.Radionice.Add(radionica);
             _ctx.SaveChanges();
 
+            TempData["ToastSuccess"] = "Radionica je uspješno dodana.";
+
             return RedirectToAction(nameof(Details), new { id = radionica.Id });
         }
 
@@ -104,7 +106,7 @@ namespace OdrzavanjeVozila.Controllers
 
         [HttpPost("uredi/{id:int}")]
         [ValidateAntiForgeryToken]
-        public IActionResult Uredi(int id, RadionicaEditModel editModel)
+        public async Task<IActionResult> Uredi(int id, RadionicaEditModel editModel)
         {
             if (id != editModel.Id)
             {
@@ -125,14 +127,22 @@ namespace OdrzavanjeVozila.Controllers
             var radionica = _ctx.Radionice.FirstOrDefault(r => r.Id == id);
             if (radionica == null) return NotFound();
 
-            radionica.Naziv = editModel.Naziv;
-            radionica.Adresa = editModel.Adresa;
-            radionica.Telefon = editModel.Telefon;
-            radionica.Email = editModel.Email;
+            // Update only required fields (Naziv, Adresa)
+            var ok = await TryUpdateModelAsync(radionica, string.Empty,
+                r => r.Naziv,
+                r => r.Adresa);
 
-            _ctx.SaveChanges();
+            if (ok && ModelState.IsValid)
+            {
+                radionica.Telefon = editModel.Telefon;
+                radionica.Email = editModel.Email;
 
-            return RedirectToAction(nameof(Details), new { id = radionica.Id });
+                _ctx.SaveChanges();
+                TempData["ToastSuccess"] = "Radionica je uspješno ažurirana.";
+                return RedirectToAction(nameof(Details), new { id = radionica.Id });
+            }
+
+            return View(editModel);
         }
 
         [HttpGet("obrisi/{id:int}")]
@@ -157,6 +167,8 @@ namespace OdrzavanjeVozila.Controllers
 
             radionica.DeletedAt = DateTime.UtcNow;
             _ctx.SaveChanges();
+
+            TempData["ToastSuccess"] = "Radionica je uspješno obrisana.";
 
             return RedirectToAction(nameof(Index));
         }

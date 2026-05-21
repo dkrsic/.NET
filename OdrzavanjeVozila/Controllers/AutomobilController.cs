@@ -112,6 +112,8 @@ namespace OdrzavanjeVozila.Controllers
             _ctx.Automobili.Add(automobil);
             _ctx.SaveChanges();
 
+            TempData["ToastSuccess"] = "Automobil je uspješno dodan.";
+
             return RedirectToAction(nameof(Details), new { id = automobil.Id });
         }
 
@@ -154,7 +156,7 @@ namespace OdrzavanjeVozila.Controllers
 
         [HttpPost("uredi/{id:int}")]
         [ValidateAntiForgeryToken]
-        public IActionResult Uredi(int id, AutomobilEditModel editModel)
+        public async Task<IActionResult> Uredi(int id, AutomobilEditModel editModel)
         {
             if (id != editModel.Id)
             {
@@ -177,19 +179,29 @@ namespace OdrzavanjeVozila.Controllers
                 return View(editModel);
             }
 
-            automobil.Marka = editModel.Marka;
-            automobil.Model = editModel.Model;
-            automobil.Godiste = editModel.Godiste;
-            automobil.RegistracijskiBroj = editModel.RegistracijskiBroj;
-            automobil.BrojSasije = editModel.BrojSasije;
-            automobil.TrenutnaKilometraza = editModel.TrenutnaKilometraza;
-            automobil.VrstaPogona = editModel.VrstaPogona;
-            automobil.DatumPrvogServisa = editModel.DatumPrvogServisa;
-            automobil.KorisnikId = editModel.KorisnikId!.Value;
+            // Only update required fields via TryUpdateModelAsync to prevent overposting
+            var ok = await TryUpdateModelAsync(automobil, string.Empty,
+                a => a.Marka,
+                a => a.Model,
+                a => a.Godiste,
+                a => a.RegistracijskiBroj,
+                a => a.BrojSasije);
 
-            _ctx.SaveChanges();
+            // Update optional fields explicitly only if model state is valid
+            if (ok && ModelState.IsValid)
+            {
+                automobil.TrenutnaKilometraza = editModel.TrenutnaKilometraza;
+                automobil.VrstaPogona = editModel.VrstaPogona;
+                automobil.DatumPrvogServisa = editModel.DatumPrvogServisa;
+                automobil.KorisnikId = editModel.KorisnikId!.Value;
 
-            return RedirectToAction(nameof(Details), new { id = automobil.Id });
+                _ctx.SaveChanges();
+                TempData["ToastSuccess"] = "Automobil je uspješno ažuriran.";
+                return RedirectToAction(nameof(Details), new { id = automobil.Id });
+            }
+
+            PopulateKorisniciDropdown(editModel.KorisnikId);
+            return View(editModel);
         }
 
         [HttpGet("obrisi/{id:int}")]
@@ -215,6 +227,8 @@ namespace OdrzavanjeVozila.Controllers
 
             automobil.DeletedAt = DateTime.UtcNow;
             _ctx.SaveChanges();
+
+            TempData["ToastSuccess"] = "Automobil je uspješno obrisan.";
 
             return RedirectToAction(nameof(Index));
         }

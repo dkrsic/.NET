@@ -45,24 +45,4 @@
 </section>
 
 @section Scripts {
-    <script>
-        (function () {
-            const searchInput = document.getElementById('servisniNalogSearch');
-            const rowsTarget = document.getElementById('servisniNalogRows');
-            const searchUrl = searchInput.dataset.searchUrl;
-            let timer = null;
-
-            async function loadRows(query) {
-                const response = await fetch(`${searchUrl}?q=${encodeURIComponent(query)}`, {
-                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
-                });
-                rowsTarget.innerHTML = await response.text();
-            }
-
-            searchInput.addEventListener('input', function () {
-                clearTimeout(timer);
-                timer = setTimeout(() => loadRows(searchInput.value), 250);
-            });
-        })();
-    </script>
 }

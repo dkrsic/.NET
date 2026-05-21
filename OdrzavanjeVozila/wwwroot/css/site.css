@@ -30,6 +30,22 @@ body {
   color: var(--app-text);
 }
 
+html.js-enabled body {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+html.js-enabled body.page-is-ready {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+html.js-enabled body.page-is-leaving {
+  opacity: 0;
+  transform: translateY(-8px) scale(0.995);
+}
+
 a {
   color: var(--app-accent);
   text-decoration: none;
@@ -110,6 +126,8 @@ a:hover {
   padding: 1.15rem;
   box-shadow: var(--app-shadow);
   animation: fadeUp 0.45s ease both;
+  position: relative;
+  overflow: hidden;
 }
 
 .entity-head {
@@ -124,6 +142,149 @@ a:hover {
   color: #f7fbff;
   font-size: 1.5rem;
   font-weight: 800;
+}
+
+.home-scene-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(40, 212, 196, 0.12), transparent 32%),
+    radial-gradient(circle at 80% 30%, rgba(125, 229, 220, 0.10), transparent 28%),
+    radial-gradient(circle at 50% 70%, rgba(255, 255, 255, 0.04), transparent 25%);
+}
+
+.home-smoke-field {
+  position: absolute;
+  inset: 0;
+}
+
+.home-smoke-puff {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--puff-size);
+  height: var(--puff-size);
+  border-radius: 999px;
+  opacity: var(--puff-opacity);
+  background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.92), rgba(170, 170, 170, 0.72) 42%, rgba(120, 120, 120, 0.22) 62%, rgba(120, 120, 120, 0) 78%);
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.08);
+  filter: blur(1px);
+  transform-origin: center center;
+}
+
+.home-car {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 98px;
+  height: 52px;
+  transform-origin: 35% 60%;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.25));
+}
+
+.home-car-body {
+  position: absolute;
+  left: 16px;
+  right: 8px;
+  top: 16px;
+  bottom: 14px;
+  border-radius: 18px 22px 14px 12px;
+  background: linear-gradient(180deg, #4fe3d5 0%, #1ea79b 100%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.home-car-cabin {
+  position: absolute;
+  left: 30px;
+  top: 8px;
+  width: 28px;
+  height: 22px;
+  border-radius: 12px 14px 8px 8px;
+  background: linear-gradient(180deg, #7df3e7 0%, #35bfb2 100%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.home-car-window {
+  position: absolute;
+  left: 35px;
+  top: 12px;
+  width: 18px;
+  height: 12px;
+  border-radius: 6px 8px 5px 5px;
+  background: linear-gradient(180deg, rgba(230, 255, 252, 0.95), rgba(129, 228, 220, 0.7));
+}
+
+.home-car-wheel {
+  position: absolute;
+  bottom: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #121820;
+  border: 3px solid #8aa0b7;
+}
+
+.home-car-wheel::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: #2b3443;
+}
+
+.home-car-wheel-left {
+  left: 22px;
+}
+
+.home-car-wheel-right {
+  right: 12px;
+}
+
+.home-scene-layer > :not(.home-smoke-field):not(.home-car) {
+  position: relative;
+  z-index: 1;
+}
+
+.entity-shell > :not(.home-scene-layer) {
+  position: relative;
+  z-index: 1;
+}
+
+.app-toast-stack {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1080;
+  display: grid;
+  gap: 0.6rem;
+  width: min(22rem, calc(100vw - 2rem));
+  pointer-events: none;
+}
+
+.app-toast {
+  pointer-events: auto;
+  background: rgba(18, 22, 31, 0.98);
+  color: var(--app-text);
+  border: 1px solid var(--app-border);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(10px);
+}
+
+.app-toast .toast-header {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--app-text);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.app-toast-success {
+  border-color: rgba(67, 192, 145, 0.45);
+}
+
+.app-toast-error {
+  border-color: rgba(231, 76, 60, 0.45);
 }
 
 .app-breadcrumb {
@@ -150,6 +311,36 @@ a:hover {
   border-radius: 10px;
   overflow: hidden;
   background: var(--app-surface);
+  position: relative;
+}
+
+.glass-table.is-loading::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15, 17, 23, 0.12), rgba(15, 17, 23, 0.34));
+  backdrop-filter: blur(1px);
+  pointer-events: none;
+}
+
+.glass-table.is-loading::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 2rem;
+  height: 2rem;
+  margin-left: -1rem;
+  margin-top: -1rem;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.16);
+  border-top-color: var(--app-accent);
+  animation: spin 0.8s linear infinite;
+  z-index: 2;
+}
+
+.glass-table.is-loading tbody {
+  opacity: 0.45;
 }
 
 .table {
@@ -194,6 +385,56 @@ a:hover {
 .detail-card dd {
   color: var(--app-text);
   margin-bottom: 0.65rem;
+}
+
+.row-action-cell {
+  white-space: nowrap;
+}
+
+.row-action-rail {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.row-action-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 4.9rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--app-border);
+  background: rgba(23, 27, 36, 0.95);
+  color: var(--app-text);
+  font-size: 0.84rem;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+  opacity: 0;
+  transform-origin: center center;
+  animation: rowActionRollIn 0.62s cubic-bezier(0.2, 0.85, 0.25, 1.15) both;
+}
+
+.row-action-link:hover,
+.row-action-link:focus {
+  color: #ffffff;
+  border-color: rgba(40, 212, 196, 0.5);
+  background: rgba(40, 212, 196, 0.16);
+  transform: translateY(-1px);
+}
+
+.row-action-link-edit {
+  animation-delay: 0.06s;
+}
+
+.row-action-link-details {
+  animation-delay: 0.16s;
+}
+
+.row-action-link-delete {
+  animation-delay: 0.26s;
 }
 
 .ajax-autocomplete {
@@ -340,6 +581,62 @@ a:hover {
   }
 }
 
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes homeParticleFloat {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.78);
+  }
+  50% {
+    transform: translate3d(var(--particle-dx), calc(var(--particle-dy) * -1), 0) scale(1.08);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(0.78);
+  }
+}
+
+@keyframes homeParticleDrift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.9);
+  }
+  50% {
+    transform: translate3d(calc(var(--particle-dx) * -0.8), var(--particle-dy), 0) scale(1.12);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(0.9);
+  }
+}
+
+@keyframes homeParticlePulse {
+  0%, 100% {
+    opacity: calc(var(--particle-opacity) * 0.7);
+    transform: translate3d(0, 0, 0) scale(0.72);
+  }
+  50% {
+    opacity: var(--particle-opacity);
+    transform: translate3d(calc(var(--particle-dx) * 0.5), calc(var(--particle-dy) * 0.5), 0) scale(1.2);
+  }
+}
+
+@keyframes rowActionRollIn {
+  0% {
+    opacity: 0;
+    transform: translate3d(-20px, 8px, 0) rotate(-78deg) scale(0.72);
+  }
+  70% {
+    opacity: 1;
+    transform: translate3d(4px, -2px, 0) rotate(10deg) scale(1.04);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
+}
+
 @media (min-width: 992px) and (max-width: 1366px) {
   .entity-shell .table {
     font-size: 0.9rem;
@@ -372,10 +669,15 @@ a:hover {
 
 @media (prefers-reduced-motion: reduce) {
   .entity-shell,
-  .stagger-group > * {
+  .home-smoke-puff,
+  .stagger-group > *,
+  .row-action-link,
+  html.js-enabled body,
+  .glass-table.is-loading::before {
     animation: none;
     transform: none;
     opacity: 1;
+    transition: none;
   }
 
   .detail-card,

@@ -105,6 +105,8 @@ namespace OdrzavanjeVozila.Controllers
             _ctx.Mehanicari.Add(mehanicar);
             _ctx.SaveChanges();
 
+            TempData["ToastSuccess"] = "Mehaničar je uspješno dodan.";
+
             return RedirectToAction(nameof(Details), new { id = mehanicar.Id });
         }
 
@@ -143,7 +145,7 @@ namespace OdrzavanjeVozila.Controllers
 
         [HttpPost("uredi/{id:int}")]
         [ValidateAntiForgeryToken]
-        public IActionResult Uredi(int id, MehanicarEditModel editModel)
+        public async Task<IActionResult> Uredi(int id, MehanicarEditModel editModel)
         {
             if (id != editModel.Id)
             {
@@ -174,16 +176,26 @@ namespace OdrzavanjeVozila.Controllers
                 return View(editModel);
             }
 
-            mehanicar.Ime = editModel.Ime;
-            mehanicar.Prezime = editModel.Prezime;
-            mehanicar.Specijalizacija = editModel.Specijalizacija;
-            mehanicar.DatumZaposlenja = editModel.DatumZaposlenja;
-            mehanicar.SatnicaEUR = editModel.SatnicaEUR;
-            mehanicar.RadionicaId = editModel.RadionicaId!.Value;
+            // Update only required fields (Ime, Prezime, SatnicaEUR)
+            var ok = await TryUpdateModelAsync(mehanicar, string.Empty,
+                m => m.Ime,
+                m => m.Prezime,
+                m => m.SatnicaEUR);
 
-            _ctx.SaveChanges();
+            if (ok && ModelState.IsValid)
+            {
+                // update optional fields explicitly
+                mehanicar.Specijalizacija = editModel.Specijalizacija;
+                mehanicar.DatumZaposlenja = editModel.DatumZaposlenja;
+                mehanicar.RadionicaId = editModel.RadionicaId!.Value;
 
-            return RedirectToAction(nameof(Details), new { id = mehanicar.Id });
+                _ctx.SaveChanges();
+                TempData["ToastSuccess"] = "Mehaničar je uspješno ažuriran.";
+                return RedirectToAction(nameof(Details), new { id = mehanicar.Id });
+            }
+
+            PopulateRadioniceDropdown(editModel.RadionicaId);
+            return View(editModel);
         }
 
         [HttpGet("obrisi/{id:int}")]
@@ -209,6 +221,8 @@ namespace OdrzavanjeVozila.Controllers
 
             mehanicar.DeletedAt = DateTime.UtcNow;
             _ctx.SaveChanges();
+
+            TempData["ToastSuccess"] = "Mehaničar je uspješno obrisan.";
 
             return RedirectToAction(nameof(Index));
         }

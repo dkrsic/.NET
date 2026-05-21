@@ -8,12 +8,12 @@
         <td>@auto.TrenutnaKilometraza.ToString("N0") km</td>
         <td>@auto.VrstaPogona</td>
         <td>@(auto.Korisnik?.PunoIme ?? "-")</td>
-        <td>
-            <a asp-controller="Automobil" asp-action="Uredi" asp-route-id="@auto.Id">Uredi</a>
-            |
-            <a asp-controller="Automobil" asp-action="Details" asp-route-id="@auto.Id">Detalji</a>
-            |
-            <a asp-controller="Automobil" asp-action="Obrisi" asp-route-id="@auto.Id">Obriši</a>
+        <td class="row-action-cell">
+            <span class="row-action-rail">
+                <a asp-controller="Automobil" asp-action="Uredi" asp-route-id="@auto.Id" class="row-action-link row-action-link-edit">Uredi</a>
+                <a asp-controller="Automobil" asp-action="Details" asp-route-id="@auto.Id" class="row-action-link row-action-link-details">Detalji</a>
+                <a asp-controller="Automobil" asp-action="Obrisi" asp-route-id="@auto.Id" class="row-action-link row-action-link-delete">Obriši</a>
+            </span>
         </td>
     </tr>
 }

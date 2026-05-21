@@ -3,6 +3,17 @@
 }
 
 <section class="entity-shell">
+    <div class="home-scene-layer" aria-hidden="true" data-home-scene>
+        <div class="home-smoke-field" data-home-smoke></div>
+        <div class="home-car" data-home-car>
+            <span class="home-car-body"></span>
+            <span class="home-car-cabin"></span>
+            <span class="home-car-window"></span>
+            <span class="home-car-wheel home-car-wheel-left"></span>
+            <span class="home-car-wheel home-car-wheel-right"></span>
+        </div>
+    </div>
+
     <div class="entity-head">
         <h2>AutoServis</h2>
     </div>
@@ -54,3 +65,202 @@
         </div>
     </div>
 </section>
+
+@section Scripts {
+    <script>
+        (function () {
+            const scene = document.querySelector("[data-home-scene]");
+            const smokeField = document.querySelector("[data-home-smoke]");
+            const car = document.querySelector("[data-home-car]");
+            const section = document.querySelector(".entity-shell");
+            const title = section.querySelector(".entity-head h2");
+
+            if (!scene || !smokeField || !car || !section) {
+                return;
+            }
+
+            const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            const smokePuffs = [];
+            let pointer = { x: 0, y: 0, active: false };
+            let bounds = null;
+            let carState = { x: 0, y: 0, rotation: 0 };
+            let spawnAccumulator = 0;
+            let defaultAnchor = { x: 0, y: 0 };
+
+            function random(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            function randomInt(min, max) {
+                return Math.floor(random(min, max + 1));
+            }
+
+            function updateBounds() {
+                bounds = section.getBoundingClientRect();
+                const titleBounds = title ? title.getBoundingClientRect() : null;
+
+                if (titleBounds) {
+                    defaultAnchor = {
+                        x: titleBounds.right - bounds.left + 22,
+                        y: titleBounds.top - bounds.top + (titleBounds.height * 0.5) + 2
+                    };
+                } else {
+                    defaultAnchor = {
+                        x: bounds.width * 0.16,
+                        y: bounds.height * 0.12
+                    };
+                }
+
+                if (!pointer.active) {
+                    pointer.x = defaultAnchor.x;
+                    pointer.y = defaultAnchor.y;
+                }
+
+                if (!carState.x && !carState.y) {
+                    carState.x = defaultAnchor.x;
+                    carState.y = defaultAnchor.y;
+                }
+            }
+
+            function createSmokePuff() {
+                const puff = document.createElement("span");
+                puff.className = "home-smoke-puff";
+
+                const size = random(16, 52);
+                puff.style.setProperty("--puff-size", `${size}px`);
+                puff.style.setProperty("--puff-delay", `${random(0, 200)}ms`);
+                puff.style.setProperty("--puff-rise", `${random(34, 90)}px`);
+                puff.style.setProperty("--puff-drift", `${random(-18, 18)}px`);
+                puff.style.setProperty("--puff-opacity", random(0.18, 0.4).toFixed(2));
+
+                smokeField.appendChild(puff);
+
+                smokePuffs.push({
+                    element: puff,
+                    age: 0,
+                    life: random(800, 1500),
+                    x: carState.x,
+                    y: carState.y,
+                    size,
+                    driftX: random(-18, 18),
+                    driftY: random(-55, -24),
+                    rotation: random(-10, 10)
+                });
+
+                return puff;
+            }
+
+            function emitSmoke(x, y, force) {
+                if (reduceMotion) {
+                    return;
+                }
+
+                const puff = createSmokePuff();
+                const size = puff.style.getPropertyValue("--puff-size") || "32px";
+                puff.style.left = `${x}px`;
+                puff.style.top = `${y}px`;
+                puff.style.width = size;
+                puff.style.height = size;
+                puff.style.opacity = String(Math.max(0.12, force));
+            }
+
+            function spawnInitialSmoke() {
+                if (reduceMotion) {
+                    return;
+                }
+
+                for (let i = 0; i < 12; i++) {
+                    emitSmoke(
+                        bounds.width * 0.16 + random(-10, 10),
+                        bounds.height * 0.68 + random(-8, 8),
+                        random(0.16, 0.38)
+                    );
+                }
+            }
+
+            function setCarPosition(x, y, rotation) {
+                carState.x = x;
+                carState.y = y;
+                carState.rotation = rotation;
+                car.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${rotation}deg)`;
+            }
+
+            function step(timestamp) {
+                if (!bounds) {
+                    updateBounds();
+                }
+
+                const targetX = pointer.active ? pointer.x : defaultAnchor.x;
+                const targetY = pointer.active ? pointer.y : defaultAnchor.y;
+                const followSpeedX = pointer.active ? 0.06 : 0.03;
+                const followSpeedY = pointer.active ? 0.05 : 0.025;
+
+                const followX = carState.x + (targetX - carState.x) * followSpeedX;
+                const followY = carState.y + (targetY - carState.y) * followSpeedY;
+                const rotation = Math.atan2(targetY - carState.y, targetX - carState.x) * 180 / Math.PI * 0.08;
+
+                setCarPosition(followX, followY, rotation);
+
+                spawnAccumulator += 1;
+                if (spawnAccumulator > 2) {
+                    spawnAccumulator = 0;
+                    emitSmoke(carState.x - 36, carState.y + 8, 0.32);
+                    if (Math.random() > 0.35) {
+                        emitSmoke(carState.x - 42, carState.y + 11, 0.24);
+                    }
+                }
+
+                const now = timestamp || performance.now();
+
+                for (let i = smokePuffs.length - 1; i >= 0; i--) {
+                    const puff = smokePuffs[i];
+                    puff.age += 16;
+                    const progress = Math.min(1, puff.age / puff.life);
+                    const driftX = puff.driftX * progress + Math.sin((now / 280) + i) * 4;
+                    const driftY = puff.driftY * progress;
+                    const scale = 0.6 + progress * 1.5;
+                    const opacity = Math.max(0, (1 - progress) * 0.42);
+
+                    puff.element.style.left = `${puff.x + driftX}px`;
+                    puff.element.style.top = `${puff.y + driftY}px`;
+                    puff.element.style.opacity = opacity.toFixed(2);
+                    puff.element.style.transform = `scale(${scale.toFixed(2)}) rotate(${puff.rotation}deg)`;
+
+                    if (progress >= 1) {
+                        puff.element.remove();
+                        smokePuffs.splice(i, 1);
+                    }
+                }
+
+                window.requestAnimationFrame(step);
+            }
+
+            section.addEventListener("pointermove", function (event) {
+                if (!bounds) {
+                    updateBounds();
+                }
+
+                pointer.x = event.clientX - bounds.left;
+                pointer.y = event.clientY - bounds.top;
+                pointer.active = true;
+            });
+
+            section.addEventListener("pointerleave", function () {
+                pointer.active = false;
+            });
+
+            window.addEventListener("resize", updateBounds);
+            updateBounds();
+
+            carState.x = defaultAnchor.x;
+            carState.y = defaultAnchor.y;
+            car.style.transform = `translate3d(${carState.x}px, ${carState.y}px, 0) rotate(0deg)`;
+
+            spawnInitialSmoke();
+
+            if (!reduceMotion) {
+                window.requestAnimationFrame(step);
+            }
+        })();
+    </script>
+}

@@ -7,12 +7,12 @@
         <td>@radionica.Adresa</td>
         <td>@radionica.Telefon</td>
         <td>@radionica.Email</td>
-        <td>
-            <a asp-controller="Radionica" asp-action="Uredi" asp-route-id="@radionica.Id">Uredi</a>
-            |
-            <a asp-controller="Radionica" asp-action="Details" asp-route-id="@radionica.Id">Detalji</a>
-            |
-            <a asp-controller="Radionica" asp-action="Obrisi" asp-route-id="@radionica.Id">Obriši</a>
+        <td class="row-action-cell">
+            <span class="row-action-rail">
+                <a asp-controller="Radionica" asp-action="Uredi" asp-route-id="@radionica.Id" class="row-action-link row-action-link-edit">Uredi</a>
+                <a asp-controller="Radionica" asp-action="Details" asp-route-id="@radionica.Id" class="row-action-link row-action-link-details">Detalji</a>
+                <a asp-controller="Radionica" asp-action="Obrisi" asp-route-id="@radionica.Id" class="row-action-link row-action-link-delete">Obriši</a>
+            </span>
         </td>
     </tr>
 }

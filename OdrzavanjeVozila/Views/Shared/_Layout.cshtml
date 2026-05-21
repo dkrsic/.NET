@@ -14,6 +14,8 @@
 <body>
     @{ 
         var currentController = (ViewContext.RouteData.Values["controller"]?.ToString() ?? string.Empty).ToLowerInvariant();
+        var toastSuccess = TempData["ToastSuccess"]?.ToString();
+        var toastError = TempData["ToastError"]?.ToString();
     }
     <header>
         <nav class="navbar navbar-expand-lg app-navbar">
@@ -57,13 +59,41 @@
         </main>
     </div>
 
-    <footer class="footer app-footer">
+    @if (!string.IsNullOrWhiteSpace(toastSuccess) || !string.IsNullOrWhiteSpace(toastError))
+    {
+        <div class="app-toast-stack" aria-live="polite" aria-atomic="true">
+            @if (!string.IsNullOrWhiteSpace(toastSuccess))
+            {
+                <div class="toast app-toast app-toast-success" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3500">
+                    <div class="toast-header">
+                        <strong class="me-auto">Uspješno</strong>
+                        <button type="button" class="btn-close btn-close-white ms-2" data-bs-dismiss="toast" aria-label="Zatvori"></button>
+                    </div>
+                    <div class="toast-body">@toastSuccess</div>
+                </div>
+            }
+
+            @if (!string.IsNullOrWhiteSpace(toastError))
+            {
+                <div class="toast app-toast app-toast-error" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="4500">
+                    <div class="toast-header">
+                        <strong class="me-auto">Greška</strong>
+                        <button type="button" class="btn-close btn-close-white ms-2" data-bs-dismiss="toast" aria-label="Zatvori"></button>
+                    </div>
+                    <div class="toast-body">@toastError</div>
+                </div>
+            }
+        </div>
+    }
+
+    <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2026 - OdrzavanjeVozila - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <partial name="_ValidationScriptsPartial" />
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

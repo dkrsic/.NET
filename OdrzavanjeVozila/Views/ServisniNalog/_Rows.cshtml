@@ -16,12 +16,12 @@
         <td>@(nalog.Mehanicar?.PunoIme ?? "-")</td>
         <td><span class="status-chip @statusClass">@statusText</span></td>
         <td>@nalog.UkupnaCijena.ToString("N2") €</td>
-        <td>
-            <a asp-controller="ServisniNalog" asp-action="Uredi" asp-route-id="@nalog.Id">Uredi</a>
-            |
-            <a asp-controller="ServisniNalog" asp-action="Details" asp-route-id="@nalog.Id">Detalji</a>
-            |
-            <a asp-controller="ServisniNalog" asp-action="Obrisi" asp-route-id="@nalog.Id">Obriši</a>
+        <td class="row-action-cell">
+            <span class="row-action-rail">
+                <a asp-controller="ServisniNalog" asp-action="Uredi" asp-route-id="@nalog.Id" class="row-action-link row-action-link-edit">Uredi</a>
+                <a asp-controller="ServisniNalog" asp-action="Details" asp-route-id="@nalog.Id" class="row-action-link row-action-link-details">Detalji</a>
+                <a asp-controller="ServisniNalog" asp-action="Obrisi" asp-route-id="@nalog.Id" class="row-action-link row-action-link-delete">Obriši</a>
+            </span>
         </td>
     </tr>
 }

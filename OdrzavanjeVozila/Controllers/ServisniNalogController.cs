@@ -137,6 +137,8 @@ namespace OdrzavanjeVozila.Controllers
             _ctx.ServisniNalozi.Add(nalog);
             _ctx.SaveChanges();
 
+            TempData["ToastSuccess"] = "Servisni nalog je uspješno dodan.";
+
             return RedirectToAction(nameof(Details), new { id = nalog.Id });
         }
 
@@ -213,6 +215,7 @@ namespace OdrzavanjeVozila.Controllers
             nalog.MehanicarId = editModel.MehanicarId!.Value;
 
             _ctx.SaveChanges();
+            TempData["ToastSuccess"] = "Servisni nalog je uspješno ažuriran.";
 
             return RedirectToAction(nameof(Details), new { id = nalog.Id });
         }
@@ -240,6 +243,8 @@ namespace OdrzavanjeVozila.Controllers
 
             nalog.DeletedAt = DateTime.UtcNow;
             _ctx.SaveChanges();
+
+            TempData["ToastSuccess"] = "Servisni nalog je uspješno obrisan.";
 
             return RedirectToAction(nameof(Index));
         }

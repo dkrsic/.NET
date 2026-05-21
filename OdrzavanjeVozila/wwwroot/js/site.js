@@ -1,4 +1,59 @@
 ﻿(function () {
+	function initPageTransitions() {
+		document.documentElement.classList.add("js-enabled");
+
+		requestAnimationFrame(function () {
+			document.body.classList.add("page-is-ready");
+		});
+
+		document.addEventListener("click", function (event) {
+			if (!(event.target instanceof Element)) {
+				return;
+			}
+
+			const anchor = event.target.closest("a[href]");
+			if (!anchor || anchor.target === "_blank" || anchor.hasAttribute("download") || anchor.dataset.noPageTransition === "true") {
+				return;
+			}
+
+			const href = anchor.getAttribute("href") || "";
+			if (!href || href.startsWith("#") || href.startsWith("javascript:")) {
+				return;
+			}
+
+			if (anchor.origin !== window.location.origin) {
+				return;
+			}
+
+			document.body.classList.add("page-is-leaving");
+		});
+
+		document.addEventListener("submit", function (event) {
+			const form = event.target;
+			if (!(form instanceof HTMLFormElement)) {
+				return;
+			}
+
+			if (form.dataset.noPageTransition === "true") {
+				return;
+			}
+
+			document.body.classList.add("page-is-leaving");
+		});
+	}
+
+	function initToasts() {
+		const toastNodes = document.querySelectorAll(".app-toast");
+		if (!toastNodes.length || !window.bootstrap || !bootstrap.Toast) {
+			return;
+		}
+
+		toastNodes.forEach(function (node) {
+			const toast = bootstrap.Toast.getOrCreateInstance(node);
+			toast.show();
+		});
+	}
+
 	function initAjaxAutocomplete() {
 		const selects = document.querySelectorAll("select.js-ajax-autocomplete[data-autocomplete-url]");
 
@@ -185,9 +240,83 @@
 		});
 	}
 
-	if (document.readyState === "loading") {
-		document.addEventListener("DOMContentLoaded", initAjaxAutocomplete);
-	} else {
+	function initAjaxTableSearches() {
+		const searchInputs = document.querySelectorAll("input[data-search-url]");
+
+		searchInputs.forEach(function (input) {
+			if (input.dataset.searchInitialized === "true") {
+				return;
+			}
+
+			const searchUrl = input.dataset.searchUrl;
+			const rowsTargetId = input.dataset.rowsTarget || (input.id ? input.id.replace("Search", "Rows") : "");
+			const rowsTarget = document.getElementById(rowsTargetId);
+			if (!searchUrl || !rowsTarget) {
+				return;
+			}
+
+			input.dataset.searchInitialized = "true";
+
+			const tableWrapper = rowsTarget.closest(".glass-table");
+			let timer = null;
+			let abortController = null;
+
+			function setLoading(isLoading) {
+				if (!tableWrapper) {
+					return;
+				}
+
+				tableWrapper.classList.toggle("is-loading", isLoading);
+				rowsTarget.setAttribute("aria-busy", String(isLoading));
+			}
+
+			async function loadRows(query) {
+				if (abortController) {
+					abortController.abort();
+				}
+
+				abortController = new AbortController();
+				setLoading(true);
+
+				try {
+					const response = await fetch(searchUrl + "?q=" + encodeURIComponent(query || ""), {
+						headers: { "X-Requested-With": "XMLHttpRequest" },
+						signal: abortController.signal
+					});
+
+					if (!response.ok) {
+						return;
+					}
+
+					rowsTarget.innerHTML = await response.text();
+				} catch (error) {
+					if (error && error.name === "AbortError") {
+						return;
+					}
+				} finally {
+					setLoading(false);
+				}
+			}
+
+			input.addEventListener("input", function () {
+				clearTimeout(timer);
+				timer = setTimeout(function () {
+					loadRows(input.value.trim());
+				}, 250);
+			});
+		});
+	}
+
+	function boot() {
+		initPageTransitions();
+		initToasts();
 		initAjaxAutocomplete();
+		initAjaxTableSearches();
+	}
+
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", boot);
+	} else {
+		boot();
 	}
 })();

@@ -8,12 +8,12 @@
         <td>@korisnik.Telefon</td>
         <td>@korisnik.Adresa</td>
         <td>@korisnik.DatumRegistracije.ToString("dd.MM.yyyy")</td>
-        <td>
-            <a asp-controller="Korisnik" asp-action="Uredi" asp-route-id="@korisnik.Id">Uredi</a>
-            |
-            <a asp-controller="Korisnik" asp-action="Details" asp-route-id="@korisnik.Id">Detalji</a>
-            |
-            <a asp-controller="Korisnik" asp-action="Obrisi" asp-route-id="@korisnik.Id">Obriši</a>
+        <td class="row-action-cell">
+            <span class="row-action-rail">
+                <a asp-controller="Korisnik" asp-action="Uredi" asp-route-id="@korisnik.Id" class="row-action-link row-action-link-edit">Uredi</a>
+                <a asp-controller="Korisnik" asp-action="Details" asp-route-id="@korisnik.Id" class="row-action-link row-action-link-details">Detalji</a>
+                <a asp-controller="Korisnik" asp-action="Obrisi" asp-route-id="@korisnik.Id" class="row-action-link row-action-link-delete">Obriši</a>
+            </span>
         </td>
     </tr>
 }

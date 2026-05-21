@@ -75,6 +75,8 @@ namespace OdrzavanjeVozila.Controllers
             _ctx.Korisnici.Add(korisnik);
             _ctx.SaveChanges();
 
+            TempData["ToastSuccess"] = "Korisnik je uspješno dodan.";
+
             return RedirectToAction(nameof(Details), new { id = korisnik.Id });
         }
 
@@ -111,7 +113,7 @@ namespace OdrzavanjeVozila.Controllers
 
         [HttpPost("uredi/{id:int}")]
         [ValidateAntiForgeryToken]
-        public IActionResult Uredi(int id, KorisnikEditModel model)
+        public async Task<IActionResult> Uredi(int id, KorisnikEditModel model)
         {
             if (id != model.Id)
             {
@@ -135,16 +137,25 @@ namespace OdrzavanjeVozila.Controllers
                 return NotFound();
             }
 
-            existingKorisnik.Ime = model.Ime;
-            existingKorisnik.Prezime = model.Prezime;
-            existingKorisnik.Email = model.Email;
-            existingKorisnik.Telefon = model.Telefon;
-            existingKorisnik.Adresa = model.Adresa;
-            existingKorisnik.DatumRegistracije = model.DatumRegistracije;
+            // Update only required fields (Ime, Prezime)
+            var ok = await TryUpdateModelAsync(existingKorisnik, string.Empty,
+                k => k.Ime,
+                k => k.Prezime);
 
-            _ctx.SaveChanges();
+            if (ok && ModelState.IsValid)
+            {
+                // update optional fields explicitly
+                existingKorisnik.Email = model.Email;
+                existingKorisnik.Telefon = model.Telefon;
+                existingKorisnik.Adresa = model.Adresa;
+                existingKorisnik.DatumRegistracije = model.DatumRegistracije;
 
-            return RedirectToAction(nameof(Details), new { id = existingKorisnik.Id });
+                _ctx.SaveChanges();
+                TempData["ToastSuccess"] = "Korisnik je uspješno ažuriran.";
+                return RedirectToAction(nameof(Details), new { id = existingKorisnik.Id });
+            }
+
+            return View(model);
         }
 
         private bool IsDuplicate(KorisnikCreateModel model, int? excludeId = null)
@@ -197,6 +208,8 @@ namespace OdrzavanjeVozila.Controllers
 
             korisnik.DeletedAt = DateTime.UtcNow;
             _ctx.SaveChanges();
+
+            TempData["ToastSuccess"] = "Korisnik je uspješno obrisan.";
 
             return RedirectToAction(nameof(Index));
         }

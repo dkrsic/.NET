@@ -8,12 +8,12 @@
         <td>@(mehanicar.Radionica?.Naziv ?? "-")</td>
         <td>@mehanicar.SatnicaEUR.ToString("N2") €/h</td>
         <td>@mehanicar.DatumZaposlenja.ToString("dd.MM.yyyy")</td>
-        <td>
-            <a asp-controller="Mehanicar" asp-action="Uredi" asp-route-id="@mehanicar.Id">Uredi</a>
-            |
-            <a asp-controller="Mehanicar" asp-action="Details" asp-route-id="@mehanicar.Id">Detalji</a>
-            |
-            <a asp-controller="Mehanicar" asp-action="Obrisi" asp-route-id="@mehanicar.Id">Obriši</a>
+        <td class="row-action-cell">
+            <span class="row-action-rail">
+                <a asp-controller="Mehanicar" asp-action="Uredi" asp-route-id="@mehanicar.Id" class="row-action-link row-action-link-edit">Uredi</a>
+                <a asp-controller="Mehanicar" asp-action="Details" asp-route-id="@mehanicar.Id" class="row-action-link row-action-link-details">Detalji</a>
+                <a asp-controller="Mehanicar" asp-action="Obrisi" asp-route-id="@mehanicar.Id" class="row-action-link row-action-link-delete">Obriši</a>
+            </span>
         </td>
     </tr>
 }

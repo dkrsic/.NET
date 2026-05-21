@@ -15,12 +15,12 @@
         <td>@dio.Kategorija</td>
         <td>@dio.Cijena.ToString("N2") €</td>
         <td><span class="stock-chip @stockClass">@dio.KolicinaNaSkladistu kom</span></td>
-        <td>
-            <a asp-controller="Dio" asp-action="Uredi" asp-route-id="@dio.Id">Uredi</a>
-            |
-            <a asp-controller="Dio" asp-action="Details" asp-route-id="@dio.Id">Detalji</a>
-            |
-            <a asp-controller="Dio" asp-action="Obrisi" asp-route-id="@dio.Id">Obriši</a>
+        <td class="row-action-cell">
+            <span class="row-action-rail">
+                <a asp-controller="Dio" asp-action="Uredi" asp-route-id="@dio.Id" class="row-action-link row-action-link-edit">Uredi</a>
+                <a asp-controller="Dio" asp-action="Details" asp-route-id="@dio.Id" class="row-action-link row-action-link-details">Detalji</a>
+                <a asp-controller="Dio" asp-action="Obrisi" asp-route-id="@dio.Id" class="row-action-link row-action-link-delete">Obriši</a>
+            </span>
         </td>
     </tr>
 }

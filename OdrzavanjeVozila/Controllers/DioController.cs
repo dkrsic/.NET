@@ -80,6 +80,8 @@ namespace OdrzavanjeVozila.Controllers
             _ctx.Dijelovi.Add(dio);
             _ctx.SaveChanges();
 
+            TempData["ToastSuccess"] = "Dio je uspješno dodan.";
+
             return RedirectToAction(nameof(Details), new { id = dio.Id });
         }
 
@@ -113,7 +115,7 @@ namespace OdrzavanjeVozila.Controllers
 
         [HttpPost("uredi/{id:int}")]
         [ValidateAntiForgeryToken]
-        public IActionResult Uredi(int id, DioEditModel editModel)
+        public async Task<IActionResult> Uredi(int id, DioEditModel editModel)
         {
             if (id != editModel.Id)
             {
@@ -134,17 +136,25 @@ namespace OdrzavanjeVozila.Controllers
             var dio = _ctx.Dijelovi.FirstOrDefault(d => d.Id == id);
             if (dio == null) return NotFound();
 
-            dio.Naziv = editModel.Naziv;
-            dio.KatalogBroj = editModel.KatalogBroj;
-            dio.Proizvodac = editModel.Proizvodac;
-            dio.Cijena = editModel.Cijena;
-            dio.Kategorija = editModel.Kategorija;
-            dio.KolicinaNaSkladistu = editModel.KolicinaNaSkladistu;
-            dio.Opis = editModel.Opis;
+            // Update only required fields (Naziv, KatalogBroj, Proizvodac, Opis)
+            var ok = await TryUpdateModelAsync(dio, string.Empty,
+                d => d.Naziv,
+                d => d.KatalogBroj,
+                d => d.Proizvodac,
+                d => d.Opis);
 
-            _ctx.SaveChanges();
+            if (ok && ModelState.IsValid)
+            {
+                dio.Cijena = editModel.Cijena;
+                dio.Kategorija = editModel.Kategorija;
+                dio.KolicinaNaSkladistu = editModel.KolicinaNaSkladistu;
 
-            return RedirectToAction(nameof(Details), new { id = dio.Id });
+                _ctx.SaveChanges();
+                TempData["ToastSuccess"] = "Dio je uspješno ažuriran.";
+                return RedirectToAction(nameof(Details), new { id = dio.Id });
+            }
+
+            return View(editModel);
         }
 
         [HttpGet("obrisi/{id:int}")]
@@ -165,6 +175,8 @@ namespace OdrzavanjeVozila.Controllers
 
             dio.DeletedAt = DateTime.UtcNow;
             _ctx.SaveChanges();
+
+            TempData["ToastSuccess"] = "Dio je uspješno obrisan.";
 
             return RedirectToAction(nameof(Index));
         }
