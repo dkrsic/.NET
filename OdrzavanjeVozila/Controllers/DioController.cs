@@ -60,6 +60,12 @@ namespace OdrzavanjeVozila.Controllers
                 return View(createModel);
             }
 
+            if (IsDuplicate(createModel))
+            {
+                ModelState.AddModelError(string.Empty, "Već postoji identičan dio.");
+                return View(createModel);
+            }
+
             var dio = new Dio
             {
                 Naziv = createModel.Naziv,
@@ -119,6 +125,12 @@ namespace OdrzavanjeVozila.Controllers
                 return View(editModel);
             }
 
+            if (IsDuplicate(editModel, id))
+            {
+                ModelState.AddModelError(string.Empty, "Već postoji identičan dio.");
+                return View(editModel);
+            }
+
             var dio = _ctx.Dijelovi.FirstOrDefault(d => d.Id == id);
             if (dio == null) return NotFound();
 
@@ -166,6 +178,19 @@ namespace OdrzavanjeVozila.Controllers
             var k = (OdrzavanjeVozila.Tools.KategorijaDijela)parsed!;
             var dijelovi = _ctx.Dijelovi.Where(d => d.Kategorija == k).ToList();
             return View(dijelovi);
+        }
+
+        private bool IsDuplicate(DioCreateModel model, int? excludeId = null)
+        {
+            return _ctx.Dijelovi.Any(d =>
+                (!excludeId.HasValue || d.Id != excludeId.Value) &&
+                d.Naziv == model.Naziv &&
+                d.KatalogBroj == model.KatalogBroj &&
+                d.Proizvodac == model.Proizvodac &&
+                d.Cijena == model.Cijena &&
+                d.Kategorija == model.Kategorija &&
+                d.KolicinaNaSkladistu == model.KolicinaNaSkladistu &&
+                d.Opis == model.Opis);
         }
     }
 }

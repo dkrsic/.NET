@@ -113,6 +113,13 @@ namespace OdrzavanjeVozila.Controllers
                 return View(createModel);
             }
 
+            if (IsDuplicate(createModel))
+            {
+                ModelState.AddModelError(string.Empty, "Već postoji identičan servisni nalog.");
+                PopulateLookups(createModel.AutomobilId, createModel.MehanicarId);
+                return View(createModel);
+            }
+
             var nalog = new ServisniNalog
             {
                 DatumOtvaranja = createModel.DatumOtvaranja,
@@ -187,6 +194,13 @@ namespace OdrzavanjeVozila.Controllers
             var nalog = _ctx.ServisniNalozi.FirstOrDefault(s => s.Id == id);
             if (nalog == null) return NotFound();
 
+            if (IsDuplicate(editModel, id))
+            {
+                ModelState.AddModelError(string.Empty, "Već postoji identičan servisni nalog.");
+                PopulateLookups(editModel.AutomobilId, editModel.MehanicarId);
+                return View(editModel);
+            }
+
             nalog.DatumOtvaranja = editModel.DatumOtvaranja;
             nalog.DatumZatvaranja = editModel.DatumZatvaranja;
             nalog.SljedecaPreporucenaPregleda = editModel.SljedecaPreporucenaPregleda;
@@ -258,6 +272,22 @@ namespace OdrzavanjeVozila.Controllers
                 nameof(Mehanicar.Id),
                 nameof(Mehanicar.PunoIme),
                 selectedMehanicarId);
+        }
+
+        private bool IsDuplicate(ServisniNalogCreateModel model, int? excludeId = null)
+        {
+            return _ctx.ServisniNalozi.Any(s =>
+                (!excludeId.HasValue || s.Id != excludeId.Value) &&
+                s.DatumOtvaranja == model.DatumOtvaranja &&
+                s.DatumZatvaranja == model.DatumZatvaranja &&
+                s.SljedecaPreporucenaPregleda == model.SljedecaPreporucenaPregleda &&
+                s.OpisRadova == model.OpisRadova &&
+                s.UkupnaCijena == model.UkupnaCijena &&
+                s.Status == model.Status &&
+                s.KilometrazaPrilikomServisa == model.KilometrazaPrilikomServisa &&
+                s.Napomena == (model.Napomena ?? string.Empty) &&
+                s.AutomobilId == model.AutomobilId &&
+                s.MehanicarId == model.MehanicarId);
         }
     }
 }

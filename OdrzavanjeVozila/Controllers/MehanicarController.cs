@@ -85,6 +85,13 @@ namespace OdrzavanjeVozila.Controllers
                 return View(createModel);
             }
 
+            if (IsDuplicate(createModel))
+            {
+                ModelState.AddModelError(string.Empty, "Već postoji identičan mehaničar.");
+                PopulateRadioniceDropdown(createModel.RadionicaId);
+                return View(createModel);
+            }
+
             var mehanicar = new Mehanicar
             {
                 Ime = createModel.Ime,
@@ -160,6 +167,13 @@ namespace OdrzavanjeVozila.Controllers
             var mehanicar = _ctx.Mehanicari.FirstOrDefault(m => m.Id == id);
             if (mehanicar == null) return NotFound();
 
+            if (IsDuplicate(editModel, id))
+            {
+                ModelState.AddModelError(string.Empty, "Već postoji identičan mehaničar.");
+                PopulateRadioniceDropdown(editModel.RadionicaId);
+                return View(editModel);
+            }
+
             mehanicar.Ime = editModel.Ime;
             mehanicar.Prezime = editModel.Prezime;
             mehanicar.Specijalizacija = editModel.Specijalizacija;
@@ -216,6 +230,16 @@ namespace OdrzavanjeVozila.Controllers
                 nameof(Radionica.Id),
                 nameof(Radionica.Naziv),
                 selectedRadionicaId);
+        }
+
+        private bool IsDuplicate(MehanicarCreateModel model, int? excludeId = null)
+        {
+            return _ctx.Mehanicari.Any(m =>
+                (!excludeId.HasValue || m.Id != excludeId.Value) &&
+                m.Ime == model.Ime &&
+                m.Prezime == model.Prezime &&
+                m.Specijalizacija == model.Specijalizacija &&
+                m.RadionicaId == model.RadionicaId);
         }
     }
 }

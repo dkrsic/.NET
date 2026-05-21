@@ -42,6 +42,14 @@ namespace OdrzavanjeVozila
                 .HasForeignKey(a => a.KorisnikId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<Automobil>()
+                .HasIndex(a => a.RegistracijskiBroj)
+                .IsUnique();
+
+            modelBuilder.Entity<Automobil>()
+                .HasIndex(a => a.BrojSasije)
+                .IsUnique();
+
             modelBuilder.Entity<ServisniNalog>()
                 .HasOne(sn => sn.Automobil)
                 .WithMany(a => a.ServisniNalozi)
@@ -59,6 +67,14 @@ namespace OdrzavanjeVozila
                 .WithMany(r => r.Mehanicari)
                 .HasForeignKey(m => m.RadionicaId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Mehanicar>()
+                .HasIndex(m => new { m.Ime, m.Prezime, m.Specijalizacija, m.RadionicaId })
+                .IsUnique();
+
+            modelBuilder.Entity<Radionica>()
+                .HasIndex(r => new { r.Naziv, r.Adresa })
+                .IsUnique();
 
             modelBuilder.Entity<NalogStavka>()
                 .HasOne(ns => ns.Nalog)

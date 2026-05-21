@@ -56,6 +56,12 @@ namespace OdrzavanjeVozila.Controllers
                 return View(model);
             }
 
+            if (IsDuplicate(model))
+            {
+                ModelState.AddModelError(string.Empty, "Već postoji identičan korisnik.");
+                return View(model);
+            }
+
             var korisnik = new Korisnik
             {
                 Ime = model.Ime,
@@ -117,6 +123,12 @@ namespace OdrzavanjeVozila.Controllers
                 return View(model);
             }
 
+            if (IsDuplicate(model, id))
+            {
+                ModelState.AddModelError(string.Empty, "Već postoji identičan korisnik.");
+                return View(model);
+            }
+
             var existingKorisnik = _ctx.Korisnici.FirstOrDefault(k => k.Id == id);
             if (existingKorisnik == null)
             {
@@ -133,6 +145,28 @@ namespace OdrzavanjeVozila.Controllers
             _ctx.SaveChanges();
 
             return RedirectToAction(nameof(Details), new { id = existingKorisnik.Id });
+        }
+
+        private bool IsDuplicate(KorisnikCreateModel model, int? excludeId = null)
+        {
+            return _ctx.Korisnici.Any(k =>
+                (!excludeId.HasValue || k.Id != excludeId.Value) &&
+                k.Ime == model.Ime &&
+                k.Prezime == model.Prezime &&
+                k.Email == model.Email &&
+                k.Telefon == model.Telefon &&
+                k.Adresa == model.Adresa);
+        }
+
+        private bool IsDuplicate(KorisnikEditModel model, int? excludeId = null)
+        {
+            return _ctx.Korisnici.Any(k =>
+                (!excludeId.HasValue || k.Id != excludeId.Value) &&
+                k.Ime == model.Ime &&
+                k.Prezime == model.Prezime &&
+                k.Email == model.Email &&
+                k.Telefon == model.Telefon &&
+                k.Adresa == model.Adresa);
         }
 
         [HttpGet("obrisi/{id:int}")]

@@ -89,6 +89,13 @@ namespace OdrzavanjeVozila.Controllers
                 return View(createModel);
             }
 
+            if (IsDuplicate(createModel))
+            {
+                ModelState.AddModelError(string.Empty, "Već postoji identično vozilo.");
+                PopulateKorisniciDropdown(createModel.KorisnikId);
+                return View(createModel);
+            }
+
             var automobil = new Automobil
             {
                 Marka = createModel.Marka,
@@ -163,6 +170,13 @@ namespace OdrzavanjeVozila.Controllers
             var automobil = _ctx.Automobili.FirstOrDefault(a => a.Id == id);
             if (automobil == null) return NotFound();
 
+            if (IsDuplicate(editModel, id))
+            {
+                ModelState.AddModelError(string.Empty, "Već postoji identično vozilo.");
+                PopulateKorisniciDropdown(editModel.KorisnikId);
+                return View(editModel);
+            }
+
             automobil.Marka = editModel.Marka;
             automobil.Model = editModel.Model;
             automobil.Godiste = editModel.Godiste;
@@ -222,6 +236,17 @@ namespace OdrzavanjeVozila.Controllers
                 nameof(Korisnik.Id),
                 nameof(Korisnik.PunoIme),
                 selectedKorisnikId);
+        }
+
+        private bool IsDuplicate(AutomobilCreateModel model, int? excludeId = null)
+        {
+            var registracijskiBroj = model.RegistracijskiBroj.Trim();
+            var brojSasije = model.BrojSasije.Trim();
+
+            return _ctx.Automobili.Any(a =>
+                (!excludeId.HasValue || a.Id != excludeId.Value) &&
+                a.RegistracijskiBroj == registracijskiBroj &&
+                a.BrojSasije == brojSasije);
         }
     }
 }

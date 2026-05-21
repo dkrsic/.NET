@@ -55,6 +55,12 @@ namespace OdrzavanjeVozila.Controllers
                 return View(createModel);
             }
 
+            if (IsDuplicate(createModel))
+            {
+                ModelState.AddModelError(string.Empty, "Već postoji identična radionica.");
+                return View(createModel);
+            }
+
             var radionica = new Radionica
             {
                 Naziv = createModel.Naziv,
@@ -110,6 +116,12 @@ namespace OdrzavanjeVozila.Controllers
                 return View(editModel);
             }
 
+            if (IsDuplicate(editModel, id))
+            {
+                ModelState.AddModelError(string.Empty, "Već postoji identična radionica.");
+                return View(editModel);
+            }
+
             var radionica = _ctx.Radionice.FirstOrDefault(r => r.Id == id);
             if (radionica == null) return NotFound();
 
@@ -147,6 +159,14 @@ namespace OdrzavanjeVozila.Controllers
             _ctx.SaveChanges();
 
             return RedirectToAction(nameof(Index));
+        }
+
+        private bool IsDuplicate(RadionicaCreateModel model, int? excludeId = null)
+        {
+            return _ctx.Radionice.Any(r =>
+                (!excludeId.HasValue || r.Id != excludeId.Value) &&
+                r.Naziv == model.Naziv &&
+                r.Adresa == model.Adresa);
         }
     }
 }
