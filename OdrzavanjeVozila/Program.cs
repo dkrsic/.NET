@@ -1,3 +1,5 @@
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using OdrzavanjeVozila;
 
@@ -11,6 +13,12 @@ builder.Services.AddDbContext<OdrzavanjeVozilaDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("OdrzavanjeVozilaDbContext")));
 
+var supportedCultures = new[]
+{
+    new CultureInfo("hr"),
+    new CultureInfo("en-US")
+};
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -23,6 +31,13 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture("hr"),
+    SupportedCultures = supportedCultures,
+    SupportedUICultures = supportedCultures
+});
 
 app.UseRouting();
 

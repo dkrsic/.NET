@@ -1,0 +1,15 @@
+@model OdrzavanjeVozila.Models.DateTimePickerModel
+@{
+    var fieldId = string.IsNullOrEmpty(Model.FieldId) ? Model.FieldName : Model.FieldId;
+    var locale = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+}
+
+<div class="app-datetime-picker" data-locale="@locale">
+    <div class="input-group">
+        <input type="text" class="form-control display" aria-label="Datum i vrijeme" readonly />
+        <button type="button" class="btn btn-outline-secondary toggle-picker" aria-label="Uredi datum">...</button>
+    </div>
+    <input type="hidden" name="@Model.FieldName" id="@fieldId" value="@(Model.Value.HasValue ? Model.Value.Value.ToString("s") : string.Empty)" />
+    <span class="text-danger" data-valmsg-for="@Model.FieldName" data-valmsg-replace="true"></span>
+    <div class="picker-panel d-none" aria-hidden="true"></div>
+</div>

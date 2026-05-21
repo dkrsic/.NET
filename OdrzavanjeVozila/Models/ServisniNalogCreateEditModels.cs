@@ -19,7 +19,7 @@ namespace OdrzavanjeVozila.Models
         [StringLength(1000, ErrorMessage = "Opis radova smije imati najviše 1000 znakova.")]
         public string OpisRadova { get; set; } = string.Empty;
 
-        [Range(typeof(decimal), "0,01", "9999999,99", ErrorMessage = "Ukupna cijena mora biti veća od 0.")]
+        [Range(0.01, 9999999.99, ErrorMessage = "Ukupna cijena mora biti veća od 0.")]
         public decimal UkupnaCijena { get; set; }
 
         [Required(ErrorMessage = "Status je obvezan.")]

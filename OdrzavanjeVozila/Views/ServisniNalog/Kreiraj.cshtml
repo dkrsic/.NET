@@ -19,20 +19,17 @@
 
             <div class="col-md-4">
                 <label asp-for="DatumOtvaranja" class="form-label"></label>
-                <input asp-for="DatumOtvaranja" type="date" class="form-control" />
-                <span asp-validation-for="DatumOtvaranja" class="text-danger"></span>
+                @await Html.PartialAsync("_DateTimePicker", new OdrzavanjeVozila.Models.DateTimePickerModel { FieldName = "DatumOtvaranja", FieldId = "DatumOtvaranja", Value = Model?.DatumOtvaranja })
             </div>
 
             <div class="col-md-4">
                 <label asp-for="DatumZatvaranja" class="form-label"></label>
-                <input asp-for="DatumZatvaranja" type="date" class="form-control" />
-                <span asp-validation-for="DatumZatvaranja" class="text-danger"></span>
+                @await Html.PartialAsync("_DateTimePicker", new OdrzavanjeVozila.Models.DateTimePickerModel { FieldName = "DatumZatvaranja", FieldId = "DatumZatvaranja", Value = Model?.DatumZatvaranja })
             </div>
 
             <div class="col-md-4">
                 <label asp-for="SljedecaPreporucenaPregleda" class="form-label"></label>
-                <input asp-for="SljedecaPreporucenaPregleda" type="date" class="form-control" />
-                <span asp-validation-for="SljedecaPreporucenaPregleda" class="text-danger"></span>
+                @await Html.PartialAsync("_DateTimePicker", new OdrzavanjeVozila.Models.DateTimePickerModel { FieldName = "SljedecaPreporucenaPregleda", FieldId = "SljedecaPreporucenaPregleda", Value = Model?.SljedecaPreporucenaPregleda })
             </div>
 
             <div class="col-md-6">

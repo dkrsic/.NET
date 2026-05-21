@@ -55,8 +55,7 @@
 
             <div class="col-md-6">
                 <label asp-for="DatumRegistracije" class="form-label"></label>
-                <input asp-for="DatumRegistracije" type="date" class="form-control" />
-                <span asp-validation-for="DatumRegistracije" class="text-danger"></span>
+                @await Html.PartialAsync("_DateTimePicker", new OdrzavanjeVozila.Models.DateTimePickerModel { FieldName = "DatumRegistracije", FieldId = "DatumRegistracije", Value = Model?.DatumRegistracije })
             </div>
 
             <div class="col-12 d-flex gap-2 pt-2">

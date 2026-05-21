@@ -307,11 +307,164 @@
 		});
 	}
 
+	function initDateTimePickers() {
+		const pickers = document.querySelectorAll('.app-datetime-picker');
+		if (!pickers.length) return;
+
+		const userLocale = navigator.language || document.documentElement.lang || 'hr';
+
+		pickers.forEach(function (p) {
+			const hidden = p.querySelector('input[type="hidden"]');
+			const display = p.querySelector('input.display');
+			const panel = p.querySelector('.picker-panel');
+
+			function formatForDisplay(iso) {
+				if (!iso) return '';
+				const d = new Date(iso);
+				if (isNaN(d)) return '';
+				return d.toLocaleString(userLocale);
+			}
+
+			function setDisplay() {
+				display.value = formatForDisplay(hidden.value);
+			}
+
+			setDisplay();
+
+			p.querySelector('.toggle-picker').addEventListener('click', function () {
+				if (!panel) return;
+				panel.classList.toggle('d-none');
+				panel.setAttribute('aria-hidden', panel.classList.contains('d-none'));
+
+				if (!panel.classList.contains('d-none')) {
+					// Custom calendar + time UI (avoid native browser datepicker)
+					panel.innerHTML = '';
+
+					const dateRow = document.createElement('div');
+					dateRow.className = 'mb-2';
+					const dateText = document.createElement('input');
+					dateText.type = 'text';
+					dateText.className = 'form-control mb-1';
+					dateText.placeholder = 'YYYY-MM-DD';
+					dateText.readOnly = true;
+
+					const calendar = document.createElement('div');
+					calendar.className = 'picker-calendar mb-2';
+
+					const timeInput = document.createElement('input');
+					timeInput.type = 'text';
+					timeInput.className = 'form-control mb-2';
+					timeInput.placeholder = 'HH:mm';
+
+					dateRow.appendChild(dateText);
+					panel.appendChild(dateRow);
+					panel.appendChild(calendar);
+					panel.appendChild(timeInput);
+
+					// helper to render a simple month calendar
+					function renderCalendar(year, month, selectedDay) {
+						calendar.innerHTML = '';
+						const header = document.createElement('div');
+						header.className = 'd-flex justify-content-between align-items-center mb-1';
+						const left = document.createElement('button'); left.type = 'button'; left.className = 'btn btn-outline-secondary btn-sm'; left.textContent = '<';
+						const right = document.createElement('button'); right.type = 'button'; right.className = 'btn btn-outline-secondary btn-sm'; right.textContent = '>';
+						const title = document.createElement('div'); title.textContent = new Date(year, month, 1).toLocaleString(userLocale, { month: 'long', year: 'numeric' });
+						header.appendChild(left); header.appendChild(title); header.appendChild(right);
+						calendar.appendChild(header);
+
+						const grid = document.createElement('div');
+						grid.style.display = 'grid';
+						grid.style.gridTemplateColumns = 'repeat(7, 1fr)';
+						grid.style.gap = '4px';
+
+						const firstDay = new Date(year, month, 1).getDay();
+						const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+						for (let i = 0; i < firstDay; i++) {
+							const empty = document.createElement('div');
+							grid.appendChild(empty);
+						}
+
+						for (let d = 1; d <= daysInMonth; d++) {
+							const btn = document.createElement('button');
+							btn.type = 'button';
+							btn.className = 'btn btn-sm btn-light';
+							btn.textContent = String(d);
+							if (selectedDay === d) btn.classList.add('active');
+							btn.addEventListener('click', function () {
+								selectedDate = new Date(year, month, d);
+								dateText.value = selectedDate.toISOString().slice(0, 10);
+								// highlight selection
+								Array.from(grid.querySelectorAll('button')).forEach(b => b.classList.remove('active'));
+								btn.classList.add('active');
+							});
+							grid.appendChild(btn);
+						}
+
+						left.addEventListener('click', function () {
+							const prev = new Date(year, month - 1, 1);
+							renderCalendar(prev.getFullYear(), prev.getMonth(), selectedDate ? selectedDate.getDate() : null);
+						});
+						right.addEventListener('click', function () {
+							const next = new Date(year, month + 1, 1);
+							renderCalendar(next.getFullYear(), next.getMonth(), selectedDate ? selectedDate.getDate() : null);
+						});
+
+						calendar.appendChild(grid);
+					}
+
+					// initialize values
+					let selectedDate = null;
+					if (hidden.value) {
+						const d = new Date(hidden.value);
+						if (!isNaN(d)) {
+							selectedDate = d;
+							dateText.value = d.toISOString().slice(0, 10);
+							timeInput.value = d.toISOString().slice(11, 16);
+						}
+					}
+					const now = selectedDate || new Date();
+					renderCalendar(now.getFullYear(), now.getMonth(), selectedDate ? selectedDate.getDate() : null);
+
+					const actions = document.createElement('div');
+					actions.className = 'd-flex gap-2 justify-content-end';
+					const ok = document.createElement('button'); ok.type = 'button'; ok.className = 'btn btn-primary btn-sm'; ok.textContent = 'OK';
+					const clear = document.createElement('button'); clear.type = 'button'; clear.className = 'btn btn-outline-secondary btn-sm'; clear.textContent = 'Obriši';
+					actions.appendChild(clear); actions.appendChild(ok);
+					panel.appendChild(actions);
+
+					ok.addEventListener('click', function () {
+						if (!dateText.value) {
+							hidden.value = '';
+							setDisplay();
+							panel.classList.add('d-none');
+							return;
+						}
+						// parse date and time (time optional)
+						const parts = dateText.value.split('-').map(Number);
+						const timeParts = (timeInput.value || '00:00').split(':').map(Number);
+						const dt = new Date(parts[0], parts[1] - 1, parts[2], timeParts[0] || 0, timeParts[1] || 0);
+						hidden.value = new Date(dt.getTime()).toISOString();
+						setDisplay();
+						panel.classList.add('d-none');
+					});
+
+					clear.addEventListener('click', function () {
+						hidden.value = '';
+						setDisplay();
+						panel.classList.add('d-none');
+					});
+				}
+			});
+		});
+	}
+
 	function boot() {
 		initPageTransitions();
 		initToasts();
 		initAjaxAutocomplete();
 		initAjaxTableSearches();
+		initDateTimePickers();
 	}
 
 	if (document.readyState === "loading") {
