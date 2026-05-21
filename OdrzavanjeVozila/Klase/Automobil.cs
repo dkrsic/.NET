@@ -34,6 +34,9 @@ namespace OdrzavanjeVozila.Klase
             ServisniNalozi = new List<ServisniNalog>();
         }
 
+        // Soft-delete timestamp: null when active
+        public DateTime? DeletedAt { get; set; }
+
         public string Naziv => $"{Marka} {Model} ({Godiste})";
     }
 }

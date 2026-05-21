@@ -106,6 +106,14 @@ namespace OdrzavanjeVozila
 
             // Seed initial data
             SeedInitialData(modelBuilder);
+
+            // Global query filters to exclude soft-deleted entities
+            modelBuilder.Entity<Automobil>().HasQueryFilter(a => a.DeletedAt == null);
+            modelBuilder.Entity<Korisnik>().HasQueryFilter(k => k.DeletedAt == null);
+            modelBuilder.Entity<Mehanicar>().HasQueryFilter(m => m.DeletedAt == null);
+            modelBuilder.Entity<Radionica>().HasQueryFilter(r => r.DeletedAt == null);
+            modelBuilder.Entity<Dio>().HasQueryFilter(d => d.DeletedAt == null);
+            modelBuilder.Entity<ServisniNalog>().HasQueryFilter(s => s.DeletedAt == null);
         }
 
         private void SeedInitialData(ModelBuilder modelBuilder)

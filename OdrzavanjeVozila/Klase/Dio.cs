@@ -24,5 +24,8 @@ namespace OdrzavanjeVozila.Klase
         {
             Stavke = new List<NalogStavka>();
         }
+
+        // Soft-delete timestamp: null when active
+        public DateTime? DeletedAt { get; set; }
     }
 }

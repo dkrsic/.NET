@@ -195,7 +195,7 @@ namespace OdrzavanjeVozila.Controllers
                 return NotFound();
             }
 
-            _ctx.Korisnici.Remove(korisnik);
+            korisnik.DeletedAt = DateTime.UtcNow;
             _ctx.SaveChanges();
 
             return RedirectToAction(nameof(Index));

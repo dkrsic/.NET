@@ -34,5 +34,8 @@ namespace OdrzavanjeVozila.Klase
             DatumOtvaranja = DateTime.Now;
             Status = StatusNaloga.Otvoren;
         }
+
+        // Soft-delete timestamp: null when active
+        public DateTime? DeletedAt { get; set; }
     }
 }

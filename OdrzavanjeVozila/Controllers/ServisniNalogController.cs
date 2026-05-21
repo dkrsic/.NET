@@ -238,7 +238,7 @@ namespace OdrzavanjeVozila.Controllers
             var nalog = _ctx.ServisniNalozi.FirstOrDefault(s => s.Id == id);
             if (nalog == null) return NotFound();
 
-            _ctx.ServisniNalozi.Remove(nalog);
+            nalog.DeletedAt = DateTime.UtcNow;
             _ctx.SaveChanges();
 
             return RedirectToAction(nameof(Index));

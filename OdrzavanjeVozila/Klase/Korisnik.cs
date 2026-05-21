@@ -24,6 +24,9 @@ namespace OdrzavanjeVozila.Klase
             DatumRegistracije = DateTime.Now;
         }
 
+        // Soft-delete timestamp: null when active
+        public DateTime? DeletedAt { get; set; }
+
         public string PunoIme => $"{Ime} {Prezime}";
     }
 }

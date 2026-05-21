@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OdrzavanjeVozila")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ac25434b83eca330e033b1a9bcf27debfa2daf88")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d729d65d543e7e83dc574feb85ebbd7ca8af0b80")]
 [assembly: System.Reflection.AssemblyProductAttribute("OdrzavanjeVozila")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OdrzavanjeVozila")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

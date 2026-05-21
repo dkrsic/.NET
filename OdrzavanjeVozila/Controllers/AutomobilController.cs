@@ -213,7 +213,7 @@ namespace OdrzavanjeVozila.Controllers
             var automobil = _ctx.Automobili.FirstOrDefault(a => a.Id == id);
             if (automobil == null) return NotFound();
 
-            _ctx.Automobili.Remove(automobil);
+            automobil.DeletedAt = DateTime.UtcNow;
             _ctx.SaveChanges();
 
             return RedirectToAction(nameof(Index));

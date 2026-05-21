@@ -20,5 +20,8 @@ namespace OdrzavanjeVozila.Klase
         {
             Mehanicari = new List<Mehanicar>();
         }
+
+        // Soft-delete timestamp: null when active
+        public DateTime? DeletedAt { get; set; }
     }
 }

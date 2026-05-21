@@ -163,7 +163,7 @@ namespace OdrzavanjeVozila.Controllers
             var dio = _ctx.Dijelovi.FirstOrDefault(d => d.Id == id);
             if (dio == null) return NotFound();
 
-            _ctx.Dijelovi.Remove(dio);
+            dio.DeletedAt = DateTime.UtcNow;
             _ctx.SaveChanges();
 
             return RedirectToAction(nameof(Index));

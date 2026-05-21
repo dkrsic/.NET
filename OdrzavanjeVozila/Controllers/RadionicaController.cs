@@ -155,7 +155,7 @@ namespace OdrzavanjeVozila.Controllers
             var radionica = _ctx.Radionice.FirstOrDefault(r => r.Id == id);
             if (radionica == null) return NotFound();
 
-            _ctx.Radionice.Remove(radionica);
+            radionica.DeletedAt = DateTime.UtcNow;
             _ctx.SaveChanges();
 
             return RedirectToAction(nameof(Index));

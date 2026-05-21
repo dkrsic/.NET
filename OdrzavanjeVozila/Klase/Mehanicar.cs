@@ -29,5 +29,8 @@ namespace OdrzavanjeVozila.Klase
         }
 
         public string PunoIme => $"{Ime} {Prezime}";
+
+        // Soft-delete timestamp: null when active
+        public DateTime? DeletedAt { get; set; }
     }
 }

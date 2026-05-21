@@ -207,7 +207,7 @@ namespace OdrzavanjeVozila.Controllers
             var mehanicar = _ctx.Mehanicari.FirstOrDefault(m => m.Id == id);
             if (mehanicar == null) return NotFound();
 
-            _ctx.Mehanicari.Remove(mehanicar);
+            mehanicar.DeletedAt = DateTime.UtcNow;
             _ctx.SaveChanges();
 
             return RedirectToAction(nameof(Index));
