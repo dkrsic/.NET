@@ -1,0 +1,20 @@
+@model List<OdrzavanjeVozila.Klase.Dio>
+<h2>Dijelovi po kategoriji</h2>
+<table class="table">
+    <thead>
+        <tr><th>Naziv</th><th>Katalog</th><th>Proizvodac</th><th>Cijena</th><th>Na skladištu</th><th>Detalji</th></tr>
+    </thead>
+    <tbody>
+    @foreach(var d in Model)
+    {
+        <tr>
+            <td>@d.Naziv</td>
+            <td>@d.KatalogBroj</td>
+            <td>@d.Proizvodac</td>
+            <td>@d.Cijena</td>
+            <td>@d.KolicinaNaSkladistu</td>
+            <td><a asp-controller="Dio" asp-action="Details" asp-route-id="@d.Id">Details</a></td>
+        </tr>
+    }
+    </tbody>
+</table>

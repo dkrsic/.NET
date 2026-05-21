@@ -7,10 +7,13 @@ namespace OdrzavanjeVozila.Klase
     {
         [Key]
         public int Id { get; set; }
+        [Required]
         public string Ime { get; set; }
+        [Required]
         public string Prezime { get; set; }
         public string Specijalizacija { get; set; }
         public DateTime DatumZaposlenja { get; set; }
+        [Required]
         public decimal SatnicaEUR { get; set; }
 
         // FK to Radionica

@@ -7,7 +7,9 @@ namespace OdrzavanjeVozila.Klase
     {
         [Key]
         public int Id { get; set; }
+        [Required]
         public string Naziv { get; set; }
+        [Required]
         public string KatalogBroj { get; set; }
         public string Proizvodac { get; set; }
         public decimal Cijena { get; set; }

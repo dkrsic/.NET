@@ -6,7 +6,9 @@ namespace OdrzavanjeVozila.Klase
     {
         [Key]
         public int Id { get; set; }
+        [Required]
         public string Naziv { get; set; }
+        [Required]
         public string Adresa { get; set; }
         public string Telefon { get; set; }
         public string Email { get; set; }

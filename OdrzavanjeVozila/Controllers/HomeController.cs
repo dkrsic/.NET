@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using OdrzavanjeVozila.Models;
-using OdrzavanjeVozila.Repositories;
+using OdrzavanjeVozila;
 using OdrzavanjeVozila.Tools;
 
 namespace OdrzavanjeVozila.Controllers
@@ -9,39 +9,24 @@ namespace OdrzavanjeVozila.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly KorisnikMockRepository _korisnikRepository;
-        private readonly AutomobilMockRepository _automobilRepository;
-        private readonly ServisniNalogMockRepository _servisniNalogRepository;
-        private readonly MehanicarMockRepository _mehanicarRepository;
-        private readonly RadionicaMockRepository _radionicaRepository;
-        private readonly DioMockRepository _dioRepository;
+        private readonly OdrzavanjeVozilaDbContext _ctx;
 
-        public HomeController(
-            ILogger<HomeController> logger,
-            KorisnikMockRepository korisnikRepository,
-            AutomobilMockRepository automobilRepository,
-            ServisniNalogMockRepository servisniNalogRepository,
-            MehanicarMockRepository mehanicarRepository,
-            RadionicaMockRepository radionicaRepository,
-            DioMockRepository dioRepository)
+        public HomeController(ILogger<HomeController> logger, OdrzavanjeVozilaDbContext ctx)
         {
             _logger = logger;
-            _korisnikRepository = korisnikRepository;
-            _automobilRepository = automobilRepository;
-            _servisniNalogRepository = servisniNalogRepository;
-            _mehanicarRepository = mehanicarRepository;
-            _radionicaRepository = radionicaRepository;
-            _dioRepository = dioRepository;
+            _ctx = ctx;
         }
 
+        [HttpGet("/")]
+        [HttpGet("/Index")]
         public IActionResult Index()
         {
-            var korisnici = _korisnikRepository.GetAll();
-            var automobili = _automobilRepository.GetAll();
-            var nalozi = _servisniNalogRepository.GetAll();
-            var mehanicari = _mehanicarRepository.GetAll();
-            var radionice = _radionicaRepository.GetAll();
-            var dijelovi = _dioRepository.GetAll();
+            var korisnici = _ctx.Korisnici.ToList();
+            var automobili = _ctx.Automobili.ToList();
+            var nalozi = _ctx.ServisniNalozi.ToList();
+            var mehanicari = _ctx.Mehanicari.ToList();
+            var radionice = _ctx.Radionice.ToList();
+            var dijelovi = _ctx.Dijelovi.ToList();
 
             ViewData["StatUsersVehicles"] = $"{korisnici.Count} korisnika / {automobili.Count} vozila";
             ViewData["StatOrders"] = $"{nalozi.Count} naloga / {nalozi.Count(n => n.Status == StatusNaloga.Otvoren || n.Status == StatusNaloga.UObradi)} aktivno";
@@ -51,11 +36,13 @@ namespace OdrzavanjeVozila.Controllers
             return View();
         }
 
+        [HttpGet("/Privacy")]
         public IActionResult Privacy()
         {
             return View();
         }
 
+        [HttpGet("/Home/Error")]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

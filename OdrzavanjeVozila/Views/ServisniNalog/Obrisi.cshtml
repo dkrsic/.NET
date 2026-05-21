@@ -1,0 +1,30 @@
+@model OdrzavanjeVozila.Klase.ServisniNalog
+@{
+    ViewData["Title"] = "Obriši servisni nalog";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb app-breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Početna</a></li>
+        <li class="breadcrumb-item"><a asp-controller="ServisniNalog" asp-action="Index">Servisni nalozi</a></li>
+        <li class="breadcrumb-item active">Obriši</li>
+    </ol>
+</nav>
+
+<section class="entity-shell">
+    <div class="entity-head"><h2>Obriši nalog</h2></div>
+    <div class="detail-card">
+        <h4>Nalog #@Model.Id</h4>
+        <p><strong>Automobil:</strong> @Model.Automobil?.Marka @Model.Automobil?.Model</p>
+        <p><strong>Mehaničar:</strong> @Model.Mehanicar?.PunoIme</p>
+        <p><strong>Status:</strong> @Model.Status</p>
+
+        <form asp-action="Obrisi" method="post">
+            <input type="hidden" asp-for="Id" />
+            <div class="pt-3">
+                <button type="submit" class="btn btn-danger">Obriši</button>
+                <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-secondary">Odustani</a>
+            </div>
+        </form>
+    </div>
+</section>

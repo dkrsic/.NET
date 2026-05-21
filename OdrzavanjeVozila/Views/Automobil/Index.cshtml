@@ -12,7 +12,18 @@
 
 <section class="entity-shell">
     <div class="entity-head">
-        <h2>Popis automobila</h2>
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+            <div>
+                <h2>Popis automobila</h2>
+            </div>
+            <a asp-controller="Automobil" asp-action="Kreiraj" class="btn btn-primary">Novi automobil</a>
+        </div>
+    </div>
+    <div class="row g-3 mb-3">
+        <div class="col-12 col-lg-6">
+            <label for="automobilSearch" class="form-label visually-hidden">Pretraga automobila</label>
+            <input id="automobilSearch" type="search" class="form-control" placeholder="Pretraži vozilo, registraciju ili vlasnika" autocomplete="off" data-search-url="@Url.Action("Pretrazi", "Automobil")" />
+        </div>
     </div>
     <div class="table-responsive glass-table">
         <table class="table table-hover align-middle mb-0">
@@ -26,21 +37,32 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach (var auto in Model)
-                {
-                    <tr>
-                        <td>@auto.Naziv</td>
-                        <td>@auto.RegistracijskiBroj</td>
-                        <td>@auto.TrenutnaKilometraza.ToString("N0") km</td>
-                        <td>@auto.VrstaPogona</td>
-                        <td>@(auto.Korisnik?.PunoIme ?? "-")</td>
-                        <td>
-                            <a asp-controller="Automobil" asp-action="Details" asp-route-id="@auto.Id">Detalji</a>
-                        </td>
-                    </tr>
-                }
+            <tbody id="automobilRows">
+                @await Html.PartialAsync("_Rows", Model)
             </tbody>
         </table>
     </div>
 </section>
+
+@section Scripts {
+    <script>
+        (function () {
+            const searchInput = document.getElementById('automobilSearch');
+            const rowsTarget = document.getElementById('automobilRows');
+            const searchUrl = searchInput.dataset.searchUrl;
+            let timer = null;
+
+            async function loadRows(query) {
+                const response = await fetch(`${searchUrl}?q=${encodeURIComponent(query)}`, {
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                });
+                rowsTarget.innerHTML = await response.text();
+            }
+
+            searchInput.addEventListener('input', function () {
+                clearTimeout(timer);
+                timer = setTimeout(() => loadRows(searchInput.value), 250);
+            });
+        })();
+    </script>
+}

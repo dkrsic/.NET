@@ -1,0 +1,29 @@
+@model OdrzavanjeVozila.Klase.Dio
+@{
+    ViewData["Title"] = "Obriši dio";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb app-breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Početna</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Dio" asp-action="Index">Dijelovi</a></li>
+        <li class="breadcrumb-item active">Obriši</li>
+    </ol>
+</nav>
+
+<section class="entity-shell">
+    <div class="entity-head"><h2>Obriši dio</h2></div>
+    <div class="detail-card">
+        <h4>@Model.Naziv</h4>
+        <p><strong>Katalog broj:</strong> @Model.KatalogBroj</p>
+        <p><strong>Proizvođač:</strong> @Model.Proizvodac</p>
+
+        <form asp-action="Obrisi" method="post">
+            <input type="hidden" asp-for="Id" />
+            <div class="pt-3">
+                <button type="submit" class="btn btn-danger">Obriši</button>
+                <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-secondary">Odustani</a>
+            </div>
+        </form>
+    </div>
+</section>

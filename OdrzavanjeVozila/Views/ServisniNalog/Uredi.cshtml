@@ -1,0 +1,83 @@
+@model OdrzavanjeVozila.Models.ServisniNalogEditModel
+@{
+    ViewData["Title"] = "Uredi servisni nalog";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb app-breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Početna</a></li>
+        <li class="breadcrumb-item"><a asp-controller="ServisniNalog" asp-action="Index">Servisni nalozi</a></li>
+        <li class="breadcrumb-item active">Uredi nalog</li>
+    </ol>
+</nav>
+
+<section class="entity-shell">
+    <div class="entity-head"><h2>Uredi nalog</h2></div>
+    <div class="detail-card">
+        <form asp-action="Uredi" method="post" class="row g-3">
+            <input type="hidden" asp-for="Id" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="col-md-4">
+                <label asp-for="DatumOtvaranja" class="form-label"></label>
+                <input asp-for="DatumOtvaranja" type="date" class="form-control" />
+                <span asp-validation-for="DatumOtvaranja" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4">
+                <label asp-for="DatumZatvaranja" class="form-label"></label>
+                <input asp-for="DatumZatvaranja" type="date" class="form-control" />
+                <span asp-validation-for="DatumZatvaranja" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4">
+                <label asp-for="SljedecaPreporucenaPregleda" class="form-label"></label>
+                <input asp-for="SljedecaPreporucenaPregleda" type="date" class="form-control" />
+                <span asp-validation-for="SljedecaPreporucenaPregleda" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="AutomobilId" class="form-label">Automobil</label>
+                <select asp-for="AutomobilId" class="form-select js-ajax-autocomplete" asp-items="ViewBag.Automobili" data-autocomplete-url="@Url.Action("AutocompleteAutomobili", "ServisniNalog")" data-autocomplete-placeholder="Pretraži automobil..."></select>
+                <span asp-validation-for="AutomobilId" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="MehanicarId" class="form-label">Mehaničar</label>
+                <select asp-for="MehanicarId" class="form-select js-ajax-autocomplete" asp-items="ViewBag.Mehanicari" data-autocomplete-url="@Url.Action("AutocompleteMehanicari", "ServisniNalog")" data-autocomplete-placeholder="Pretraži mehaničara..."></select>
+                <span asp-validation-for="MehanicarId" class="text-danger"></span>
+            </div>
+
+            <div class="col-12">
+                <label asp-for="OpisRadova" class="form-label"></label>
+                <textarea asp-for="OpisRadova" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="OpisRadova" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4">
+                <label asp-for="UkupnaCijena" class="form-label"></label>
+                <input asp-for="UkupnaCijena" class="form-control" />
+                <span asp-validation-for="UkupnaCijena" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4">
+                <label asp-for="Status" class="form-label"></label>
+                <select asp-for="Status" class="form-select">
+                    <option value="">-- odaberi --</option>
+                    @foreach (var st in Enum.GetValues(typeof(OdrzavanjeVozila.Tools.StatusNaloga)))
+                    {
+                        <option value="@st">@st</option>
+                    }
+                </select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+
+            <div class="col-12 d-flex gap-2 pt-2">
+                <button type="submit" class="btn btn-primary">Spremi promjene</button>
+                <a asp-controller="ServisniNalog" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-secondary">Povratak</a>
+            </div>
+        </form>
+    </div>
+</section>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

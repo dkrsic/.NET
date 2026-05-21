@@ -12,7 +12,18 @@
 
 <section class="entity-shell">
     <div class="entity-head">
-        <h2>Popis mehaničara</h2>
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+            <div>
+                <h2>Popis mehaničara</h2>
+            </div>
+            <a asp-controller="Mehanicar" asp-action="Kreiraj" class="btn btn-primary">Novi mehaničar</a>
+        </div>
+    </div>
+    <div class="row g-3 mb-3">
+        <div class="col-12 col-lg-6">
+            <label for="mehanicarSearch" class="form-label visually-hidden">Pretraga mehaničara</label>
+            <input id="mehanicarSearch" type="search" class="form-control" placeholder="Pretraži ime, specijalizaciju ili radionicu" autocomplete="off" data-search-url="@Url.Action("Pretrazi", "Mehanicar")" />
+        </div>
     </div>
     <div class="table-responsive glass-table">
         <table class="table table-hover align-middle mb-0">
@@ -26,21 +37,32 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach (var mehanicar in Model)
-                {
-                    <tr>
-                        <td>@mehanicar.PunoIme</td>
-                        <td>@mehanicar.Specijalizacija</td>
-                        <td>@(mehanicar.Radionica?.Naziv ?? "-")</td>
-                        <td>@mehanicar.SatnicaEUR.ToString("N2") €/h</td>
-                        <td>@mehanicar.DatumZaposlenja.ToString("dd.MM.yyyy")</td>
-                        <td>
-                            <a asp-controller="Mehanicar" asp-action="Details" asp-route-id="@mehanicar.Id">Detalji</a>
-                        </td>
-                    </tr>
-                }
+            <tbody id="mehanicarRows">
+                @await Html.PartialAsync("_Rows", Model)
             </tbody>
         </table>
     </div>
 </section>
+
+@section Scripts {
+    <script>
+        (function () {
+            const searchInput = document.getElementById('mehanicarSearch');
+            const rowsTarget = document.getElementById('mehanicarRows');
+            const searchUrl = searchInput.dataset.searchUrl;
+            let timer = null;
+
+            async function loadRows(query) {
+                const response = await fetch(`${searchUrl}?q=${encodeURIComponent(query)}`, {
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                });
+                rowsTarget.innerHTML = await response.text();
+            }
+
+            searchInput.addEventListener('input', function () {
+                clearTimeout(timer);
+                timer = setTimeout(() => loadRows(searchInput.value), 250);
+            });
+        })();
+    </script>
+}

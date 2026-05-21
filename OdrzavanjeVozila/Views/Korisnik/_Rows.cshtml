@@ -1,0 +1,19 @@
+@model IEnumerable<OdrzavanjeVozila.Klase.Korisnik>
+
+@foreach (var korisnik in Model)
+{
+    <tr>
+        <td>@korisnik.PunoIme</td>
+        <td>@korisnik.Email</td>
+        <td>@korisnik.Telefon</td>
+        <td>@korisnik.Adresa</td>
+        <td>@korisnik.DatumRegistracije.ToString("dd.MM.yyyy")</td>
+        <td>
+            <a asp-controller="Korisnik" asp-action="Uredi" asp-route-id="@korisnik.Id">Uredi</a>
+            |
+            <a asp-controller="Korisnik" asp-action="Details" asp-route-id="@korisnik.Id">Detalji</a>
+            |
+            <a asp-controller="Korisnik" asp-action="Obrisi" asp-route-id="@korisnik.Id">Obriši</a>
+        </td>
+    </tr>
+}

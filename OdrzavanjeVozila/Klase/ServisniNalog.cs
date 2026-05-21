@@ -15,7 +15,7 @@ namespace OdrzavanjeVozila.Klase
         public decimal UkupnaCijena { get; set; }
         public StatusNaloga Status { get; set; }
         public int KilometrazaPrilikomServisa { get; set; }
-        public string Napomena { get; set; }
+        public string Napomena { get; set; } = string.Empty;
 
         // FK to Automobil
         public int AutomobilId { get; set; }

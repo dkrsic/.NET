@@ -203,20 +203,20 @@ namespace OdrzavanjeVozila.Migrations
                             Id = 1,
                             Adresa = "Ilica 200, Zagreb",
                             DatumRegistracije = new DateTime(2025, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "marko@mail.com",
+                            Email = "marko.horvat@autosluzba.hr",
                             Ime = "Marko",
                             Prezime = "Horvat",
-                            Telefon = "099-1111111"
+                            Telefon = "+385 91 482 1163"
                         },
                         new
                         {
                             Id = 2,
                             Adresa = "Gunduliceva 50, Split",
                             DatumRegistracije = new DateTime(2025, 2, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "ana@mail.com",
+                            Email = "ana.novak@autosluzba.hr",
                             Ime = "Ana",
                             Prezime = "Novak",
-                            Telefon = "099-2222222"
+                            Telefon = "+385 91 637 2048"
                         });
                 });
 
@@ -356,17 +356,17 @@ namespace OdrzavanjeVozila.Migrations
                         {
                             Id = 1,
                             Adresa = "Ilica 100, Zagreb",
-                            Email = "info@radionica-zg.hr",
+                            Email = "kontakt.zagreb@radionica-mreza.hr",
                             Naziv = "Radionica Zagreb",
-                            Telefon = "01-1234567"
+                            Telefon = "+385 1 4829 615"
                         },
                         new
                         {
                             Id = 2,
                             Adresa = "Marmontova 50, Split",
-                            Email = "info@radionica-split.hr",
+                            Email = "kontakt.split@radionica-mreza.hr",
                             Naziv = "Radionica Split",
-                            Telefon = "021-1234567"
+                            Telefon = "+385 21 784 392"
                         });
                 });
 

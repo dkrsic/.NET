@@ -1,0 +1,19 @@
+@model IEnumerable<OdrzavanjeVozila.Klase.Automobil>
+
+@foreach (var auto in Model)
+{
+    <tr>
+        <td>@auto.Naziv</td>
+        <td>@auto.RegistracijskiBroj</td>
+        <td>@auto.TrenutnaKilometraza.ToString("N0") km</td>
+        <td>@auto.VrstaPogona</td>
+        <td>@(auto.Korisnik?.PunoIme ?? "-")</td>
+        <td>
+            <a asp-controller="Automobil" asp-action="Uredi" asp-route-id="@auto.Id">Uredi</a>
+            |
+            <a asp-controller="Automobil" asp-action="Details" asp-route-id="@auto.Id">Detalji</a>
+            |
+            <a asp-controller="Automobil" asp-action="Obrisi" asp-route-id="@auto.Id">Obriši</a>
+        </td>
+    </tr>
+}

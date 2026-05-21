@@ -8,10 +8,15 @@ namespace OdrzavanjeVozila.Klase
     {
         [Key]
         public int Id { get; set; }
+        [Required]
         public string Marka { get; set; }
+        [Required]
         public string Model { get; set; }
+        [Required]
         public int Godiste { get; set; }
+        [Required]
         public string RegistracijskiBroj { get; set; }
+        [Required]
         public string BrojSasije { get; set; }
         public int TrenutnaKilometraza { get; set; }
         public VrstaPogona VrstaPogona { get; set; }

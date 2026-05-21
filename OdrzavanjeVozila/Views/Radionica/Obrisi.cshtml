@@ -1,0 +1,41 @@
+@model OdrzavanjeVozila.Klase.Radionica
+@{
+    ViewData["Title"] = "Obriši radionicu";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb app-breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Početna</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Radionica" asp-action="Index">Radionice</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Radionica" asp-action="Details" asp-route-id="@Model.Id">@Model.Naziv</a></li>
+        <li class="breadcrumb-item active">Obriši</li>
+    </ol>
+</nav>
+
+<section class="entity-shell">
+    <div class="entity-head">
+        <h2>Obriši radionicu</h2>
+        <p class="text-secondary mb-0">Ova radnja će trajno ukloniti zapis.</p>
+    </div>
+
+    <div class="detail-card">
+        <dl class="row mb-4">
+            <dt class="col-sm-4">Naziv</dt>
+            <dd class="col-sm-8">@Model.Naziv</dd>
+            <dt class="col-sm-4">Adresa</dt>
+            <dd class="col-sm-8">@Model.Adresa</dd>
+            <dt class="col-sm-4">Telefon</dt>
+            <dd class="col-sm-8">@Model.Telefon</dd>
+            <dt class="col-sm-4">Email</dt>
+            <dd class="col-sm-8">@Model.Email</dd>
+            <dt class="col-sm-4">Mehaničari</dt>
+            <dd class="col-sm-8">@Model.Mehanicari.Count</dd>
+        </dl>
+
+        <form asp-action="Obrisi" method="post" class="d-flex gap-2">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger">Obriši</button>
+            <a asp-controller="Radionica" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-secondary">Odustani</a>
+        </form>
+    </div>
+</section>

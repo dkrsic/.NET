@@ -85,14 +85,40 @@ namespace OdrzavanjeVozila.Migrations
                         {
                             Id = 2,
                             BrojSasije = "WBXYZ0000000000001",
-                            DatumPrvogServisa = new DateTime(2023, 11, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DatumPrvogServisa = new DateTime(2024, 9, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Godiste = 2020,
                             KorisnikId = 2,
                             Marka = "BMW",
-                            Model = "320",
+                            Model = "320d",
                             RegistracijskiBroj = "ZG-567-CD",
                             TrenutnaKilometraza = 32000,
                             VrstaPogona = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BrojSasije = "W0L0AHL48J1234567",
+                            DatumPrvogServisa = new DateTime(2024, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Godiste = 2018,
+                            KorisnikId = 3,
+                            Marka = "Opel",
+                            Model = "Astra",
+                            RegistracijskiBroj = "RI-345-EF",
+                            TrenutnaKilometraza = 78000,
+                            VrstaPogona = 4
+                        },
+                        new
+                        {
+                            Id = 4,
+                            BrojSasije = "JTNB43BE003123456",
+                            DatumPrvogServisa = new DateTime(2025, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Godiste = 2021,
+                            KorisnikId = 4,
+                            Marka = "Toyota",
+                            Model = "Corolla",
+                            RegistracijskiBroj = "ZG-890-GH",
+                            TrenutnaKilometraza = 21000,
+                            VrstaPogona = 3
                         });
                 });
 
@@ -156,6 +182,39 @@ namespace OdrzavanjeVozila.Migrations
                             Naziv = "Kocione plocice",
                             Opis = "Set prednjih kocionih plocica",
                             Proizvodac = "Bosch"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Cijena = 89.90m,
+                            KatalogBroj = "BAT-014",
+                            Kategorija = 3,
+                            KolicinaNaSkladistu = 12,
+                            Naziv = "Akumulator",
+                            Opis = "Start-stop akumulator",
+                            Proizvodac = "Varta"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Cijena = 12.75m,
+                            KatalogBroj = "FLT-022",
+                            Kategorija = 0,
+                            KolicinaNaSkladistu = 18,
+                            Naziv = "Filter zraka",
+                            Opis = "Motorni filter zraka",
+                            Proizvodac = "Mann"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Cijena = 79.99m,
+                            KatalogBroj = "TIR-20555",
+                            Kategorija = 5,
+                            KolicinaNaSkladistu = 8,
+                            Naziv = "Gume 205/55 R16",
+                            Opis = "Ljetni komplet guma",
+                            Proizvodac = "Michelin"
                         });
                 });
 
@@ -200,20 +259,40 @@ namespace OdrzavanjeVozila.Migrations
                             Id = 1,
                             Adresa = "Ilica 200, Zagreb",
                             DatumRegistracije = new DateTime(2025, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "marko@mail.com",
+                            Email = "marko.horvat@autosluzba.hr",
                             Ime = "Marko",
                             Prezime = "Horvat",
-                            Telefon = "099-1111111"
+                            Telefon = "+385 91 482 1163"
                         },
                         new
                         {
                             Id = 2,
                             Adresa = "Gunduliceva 50, Split",
                             DatumRegistracije = new DateTime(2025, 2, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "ana@mail.com",
+                            Email = "ana.novak@autosluzba.hr",
                             Ime = "Ana",
                             Prezime = "Novak",
-                            Telefon = "099-2222222"
+                            Telefon = "+385 91 637 2048"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Adresa = "Korzo 15, Rijeka",
+                            DatumRegistracije = new DateTime(2025, 3, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "ivan.peric@autosluzba.hr",
+                            Ime = "Ivan",
+                            Prezime = "Peric",
+                            Telefon = "+385 95 781 9044"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Adresa = "Dubrovacka 21, Zagreb",
+                            DatumRegistracije = new DateTime(2025, 4, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "maja.juric@autosluzba.hr",
+                            Ime = "Maja",
+                            Prezime = "Juric",
+                            Telefon = "+385 98 520 7712"
                         });
                 });
 
@@ -283,6 +362,26 @@ namespace OdrzavanjeVozila.Migrations
                             RadionicaId = 2,
                             SatnicaEUR = 28.00m,
                             Specijalizacija = "Mehanika"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DatumZaposlenja = new DateTime(2021, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ime = "Stjepan",
+                            Prezime = "Boric",
+                            RadionicaId = 3,
+                            SatnicaEUR = 27.50m,
+                            Specijalizacija = "Klimatizacija"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DatumZaposlenja = new DateTime(2024, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Ime = "Filip",
+                            Prezime = "Maric",
+                            RadionicaId = 3,
+                            SatnicaEUR = 32.00m,
+                            Specijalizacija = "Dijagnostika"
                         });
                 });
 
@@ -318,6 +417,53 @@ namespace OdrzavanjeVozila.Migrations
                     b.HasIndex("NalogId");
 
                     b.ToTable("NalogStavke");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CijenaKomad = 15.99m,
+                            DioId = 1,
+                            Kolicina = 1,
+                            NalogId = 1,
+                            Napomena = "Motorno ulje 5W-30"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CijenaKomad = 25.50m,
+                            DioId = 2,
+                            Kolicina = 4,
+                            NalogId = 1,
+                            Napomena = "Prednji set kočionih pločica"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CijenaKomad = 89.90m,
+                            DioId = 3,
+                            Kolicina = 1,
+                            NalogId = 2,
+                            Napomena = "Start-stop akumulator"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CijenaKomad = 12.75m,
+                            DioId = 4,
+                            Kolicina = 2,
+                            NalogId = 3,
+                            Napomena = "Filteri za zrak"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CijenaKomad = 79.99m,
+                            DioId = 5,
+                            Kolicina = 4,
+                            NalogId = 4,
+                            Napomena = "Set ljetnih guma"
+                        });
                 });
 
             modelBuilder.Entity("OdrzavanjeVozila.Klase.Radionica", b =>
@@ -353,17 +499,25 @@ namespace OdrzavanjeVozila.Migrations
                         {
                             Id = 1,
                             Adresa = "Ilica 100, Zagreb",
-                            Email = "info@radionica-zg.hr",
+                            Email = "kontakt.zagreb@radionica-mreza.hr",
                             Naziv = "Radionica Zagreb",
-                            Telefon = "01-1234567"
+                            Telefon = "+385 1 4829 615"
                         },
                         new
                         {
                             Id = 2,
                             Adresa = "Marmontova 50, Split",
-                            Email = "info@radionica-split.hr",
+                            Email = "kontakt.split@radionica-mreza.hr",
                             Naziv = "Radionica Split",
-                            Telefon = "021-1234567"
+                            Telefon = "+385 21 784 392"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Adresa = "Riva 12, Rijeka",
+                            Email = "kontakt.rijeka@radionica-mreza.hr",
+                            Naziv = "Radionica Rijeka",
+                            Telefon = "+385 51 642 880"
                         });
                 });
 
@@ -415,6 +569,64 @@ namespace OdrzavanjeVozila.Migrations
                     b.HasIndex("MehanicarId");
 
                     b.ToTable("ServisniNalozi");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AutomobilId = 1,
+                            DatumOtvaranja = new DateTime(2026, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DatumZatvaranja = new DateTime(2026, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            KilometrazaPrilikomServisa = 45250,
+                            MehanicarId = 1,
+                            Napomena = "Vozilo uredno, preporucena kontrola za 6 mjeseci",
+                            OpisRadova = "Redovni servis i zamjena ulja",
+                            SljedecaPreporucenaPregleda = new DateTime(2026, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 2,
+                            UkupnaCijena = 96.97m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AutomobilId = 2,
+                            DatumOtvaranja = new DateTime(2026, 2, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DatumZatvaranja = (DateTime?)null,
+                            KilometrazaPrilikomServisa = 32220,
+                            MehanicarId = 2,
+                            Napomena = "Čeka potvrdu narudžbe dodatnog dijela",
+                            OpisRadova = "Dijagnostika elektrike i zamjena akumulatora",
+                            SljedecaPreporucenaPregleda = new DateTime(2026, 8, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 1,
+                            UkupnaCijena = 89.90m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AutomobilId = 3,
+                            DatumOtvaranja = new DateTime(2026, 3, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DatumZatvaranja = new DateTime(2026, 3, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            KilometrazaPrilikomServisa = 78120,
+                            MehanicarId = 3,
+                            Napomena = "Kočnice testirane i ispravne",
+                            OpisRadova = "Servis kočnica i zamjena plocica",
+                            SljedecaPreporucenaPregleda = new DateTime(2026, 9, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 2,
+                            UkupnaCijena = 112.45m
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AutomobilId = 4,
+                            DatumOtvaranja = new DateTime(2026, 4, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DatumZatvaranja = (DateTime?)null,
+                            KilometrazaPrilikomServisa = 21400,
+                            MehanicarId = 4,
+                            Napomena = "Čeka dolazak vozila u radionicu",
+                            OpisRadova = "Zamjena guma i sezonski pregled",
+                            SljedecaPreporucenaPregleda = (DateTime?)null,
+                            Status = 0,
+                            UkupnaCijena = 79.99m
+                        });
                 });
 
             modelBuilder.Entity("OdrzavanjeVozila.Klase.Automobil", b =>

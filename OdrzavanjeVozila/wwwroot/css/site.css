@@ -196,6 +196,51 @@ a:hover {
   margin-bottom: 0.65rem;
 }
 
+.ajax-autocomplete {
+  position: relative;
+  width: 100%;
+}
+
+.ajax-autocomplete-list {
+  position: absolute;
+  top: calc(100% + 0.3rem);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  max-height: 220px;
+  overflow-y: auto;
+  border: 1px solid var(--app-border);
+  border-radius: 10px;
+  background: var(--app-surface);
+  box-shadow: var(--app-shadow);
+}
+
+.ajax-autocomplete-item {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid var(--app-border);
+  background: transparent;
+  color: var(--app-text);
+  padding: 0.55rem 0.75rem;
+  text-align: left;
+}
+
+.ajax-autocomplete-item:last-child {
+  border-bottom: 0;
+}
+
+.ajax-autocomplete-item:hover,
+.ajax-autocomplete-item:focus {
+  background: var(--app-accent-soft);
+  color: #ffffff;
+}
+
+.ajax-autocomplete-empty {
+  color: var(--app-muted);
+  padding: 0.55rem 0.75rem;
+}
+
 .stagger-group > * {
   opacity: 0;
   transform: translateY(10px);

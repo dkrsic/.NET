@@ -1,0 +1,20 @@
+@model List<OdrzavanjeVozila.Klase.ServisniNalog>
+<h2>Servisni nalozi po statusu</h2>
+<table class="table">
+    <thead>
+        <tr><th>ID</th><th>Automobil</th><th>Mehanicar</th><th>Datum</th><th>Status</th><th>Detalji</th></tr>
+    </thead>
+    <tbody>
+    @foreach(var n in Model)
+    {
+        <tr>
+            <td>@n.Id</td>
+            <td>@(n.Automobil != null ? n.Automobil.Marka + " " + n.Automobil.Model : "-")</td>
+            <td>@(n.Mehanicar != null ? n.Mehanicar.PunoIme : "-")</td>
+            <td>@n.DatumOtvaranja.ToShortDateString()</td>
+            <td>@n.Status</td>
+            <td><a asp-controller="ServisniNalog" asp-action="Details" asp-route-id="@n.Id">Details</a></td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -1,0 +1,18 @@
+@model List<OdrzavanjeVozila.Klase.Mehanicar>
+<h2>Mehaničari radionice</h2>
+<table class="table">
+    <thead>
+        <tr><th>Ime</th><th>Specijalizacija</th><th>Satnica</th><th>Detalji</th></tr>
+    </thead>
+    <tbody>
+    @foreach(var m in Model)
+    {
+        <tr>
+            <td>@m.PunoIme</td>
+            <td>@m.Specijalizacija</td>
+            <td>@m.SatnicaEUR</td>
+            <td><a asp-controller="Mehanicar" asp-action="Details" asp-route-id="@m.Id">Details</a></td>
+        </tr>
+    }
+    </tbody>
+</table>

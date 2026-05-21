@@ -1,0 +1,19 @@
+@model IEnumerable<OdrzavanjeVozila.Klase.Mehanicar>
+
+@foreach (var mehanicar in Model)
+{
+    <tr>
+        <td>@mehanicar.PunoIme</td>
+        <td>@mehanicar.Specijalizacija</td>
+        <td>@(mehanicar.Radionica?.Naziv ?? "-")</td>
+        <td>@mehanicar.SatnicaEUR.ToString("N2") €/h</td>
+        <td>@mehanicar.DatumZaposlenja.ToString("dd.MM.yyyy")</td>
+        <td>
+            <a asp-controller="Mehanicar" asp-action="Uredi" asp-route-id="@mehanicar.Id">Uredi</a>
+            |
+            <a asp-controller="Mehanicar" asp-action="Details" asp-route-id="@mehanicar.Id">Detalji</a>
+            |
+            <a asp-controller="Mehanicar" asp-action="Obrisi" asp-route-id="@mehanicar.Id">Obriši</a>
+        </td>
+    </tr>
+}

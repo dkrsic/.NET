@@ -1,0 +1,28 @@
+@model OdrzavanjeVozila.Klase.Mehanicar
+@{
+    ViewData["Title"] = "Obriši mehaničara";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb app-breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Početna</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Mehanicar" asp-action="Index">Mehaničari</a></li>
+        <li class="breadcrumb-item active">Obriši</li>
+    </ol>
+</nav>
+
+<section class="entity-shell">
+    <div class="entity-head"><h2>Obriši mehaničara</h2></div>
+    <div class="detail-card">
+        <h4>@Model.PunoIme</h4>
+        <p><strong>Radionica:</strong> @Model.Radionica?.Naziv</p>
+
+        <form asp-action="Obrisi" method="post">
+            <input type="hidden" asp-for="Id" />
+            <div class="pt-3">
+                <button type="submit" class="btn btn-danger">Obriši</button>
+                <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-secondary">Odustani</a>
+            </div>
+        </form>
+    </div>
+</section>

@@ -1,31 +1,152 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OdrzavanjeVozila.Repositories;
+using Microsoft.EntityFrameworkCore;
+using OdrzavanjeVozila;
+using OdrzavanjeVozila.Klase;
+using OdrzavanjeVozila.Models;
 
 namespace OdrzavanjeVozila.Controllers
 {
+    [Route("radionice")]
     public class RadionicaController : Controller
     {
-        private readonly RadionicaMockRepository _radionicaRepo;
-        private readonly MehanicarMockRepository _mehanicarRepo;
+        private readonly OdrzavanjeVozilaDbContext _ctx;
 
-        public RadionicaController(RadionicaMockRepository radionicaRepo, MehanicarMockRepository mehanicarRepo)
+        public RadionicaController(OdrzavanjeVozilaDbContext ctx)
         {
-            _radionicaRepo = radionicaRepo;
-            _mehanicarRepo = mehanicarRepo;
+            _ctx = ctx;
         }
 
+        [HttpGet("")]
+        [HttpGet("index")]
         public IActionResult Index()
         {
-            var radionice = _radionicaRepo.GetAll();
+            var radionice = _ctx.Radionice.ToList();
             return View(radionice);
         }
 
+        [HttpGet("pretrazi")]
+        public IActionResult Pretrazi(string? q)
+        {
+            var search = (q ?? string.Empty).Trim().ToLower();
+
+            var radionice = _ctx.Radionice
+                .Where(r => string.IsNullOrEmpty(search)
+                    || r.Naziv.ToLower().Contains(search)
+                    || r.Adresa.ToLower().Contains(search)
+                    || r.Telefon.ToLower().Contains(search)
+                    || r.Email.ToLower().Contains(search))
+                .ToList();
+
+            return PartialView("_Rows", radionice);
+        }
+
+        [HttpGet("kreiraj")]
+        public IActionResult Kreiraj()
+        {
+            return View(new RadionicaCreateModel());
+        }
+
+        [HttpPost("kreiraj")]
+        [ValidateAntiForgeryToken]
+        public IActionResult Kreiraj(RadionicaCreateModel createModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(createModel);
+            }
+
+            var radionica = new Radionica
+            {
+                Naziv = createModel.Naziv,
+                Adresa = createModel.Adresa,
+                Telefon = createModel.Telefon,
+                Email = createModel.Email
+            };
+
+            _ctx.Radionice.Add(radionica);
+            _ctx.SaveChanges();
+
+            return RedirectToAction(nameof(Details), new { id = radionica.Id });
+        }
+
+        [HttpGet("{id:int}")]
+        [HttpGet("detalji/{id:int}")]
         public IActionResult Details(int id)
         {
-            var radionica = _radionicaRepo.GetById(id);
+            var radionica = _ctx.Radionice
+                .Include(r => r.Mehanicari)
+                .FirstOrDefault(r => r.Id == id);
             if (radionica == null) return NotFound();
-            radionica.Mehanicari = _mehanicarRepo.GetByRadionicaId(id);
             return View(radionica);
+        }
+
+        [HttpGet("uredi/{id:int}")]
+        public IActionResult Uredi(int id)
+        {
+            var radionica = _ctx.Radionice.FirstOrDefault(r => r.Id == id);
+            if (radionica == null) return NotFound();
+
+            return View(new RadionicaEditModel
+            {
+                Id = radionica.Id,
+                Naziv = radionica.Naziv,
+                Adresa = radionica.Adresa,
+                Telefon = radionica.Telefon,
+                Email = radionica.Email
+            });
+        }
+
+        [HttpPost("uredi/{id:int}")]
+        [ValidateAntiForgeryToken]
+        public IActionResult Uredi(int id, RadionicaEditModel editModel)
+        {
+            if (id != editModel.Id)
+            {
+                return NotFound();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(editModel);
+            }
+
+            var radionica = _ctx.Radionice.FirstOrDefault(r => r.Id == id);
+            if (radionica == null) return NotFound();
+
+            radionica.Naziv = editModel.Naziv;
+            radionica.Adresa = editModel.Adresa;
+            radionica.Telefon = editModel.Telefon;
+            radionica.Email = editModel.Email;
+
+            _ctx.SaveChanges();
+
+            return RedirectToAction(nameof(Details), new { id = radionica.Id });
+        }
+
+        [HttpGet("obrisi/{id:int}")]
+        public IActionResult Obrisi(int id)
+        {
+            var radionica = _ctx.Radionice
+                .Include(r => r.Mehanicari)
+                .FirstOrDefault(r => r.Id == id);
+
+            if (radionica == null) return NotFound();
+
+            return View(radionica);
+        }
+
+        [HttpPost("obrisi/{id:int}")]
+        [ValidateAntiForgeryToken]
+        [ActionName("Obrisi")]
+        public IActionResult ObrisiPotvrdi(int id)
+        {
+            var radionica = _ctx.Radionice.FirstOrDefault(r => r.Id == id);
+            if (radionica == null) return NotFound();
+
+            _ctx.Radionice.Remove(radionica);
+            _ctx.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

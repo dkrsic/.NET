@@ -1,0 +1,64 @@
+@model OdrzavanjeVozila.Models.MehanicarCreateModel
+@{
+    ViewData["Title"] = "Novi mehaničar";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb app-breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Početna</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Mehanicar" asp-action="Index">Mehaničari</a></li>
+        <li class="breadcrumb-item active">Novi mehaničar</li>
+    </ol>
+</nav>
+
+<section class="entity-shell">
+    <div class="entity-head"><h2>Dodaj mehaničara</h2></div>
+    <div class="detail-card">
+        <form asp-action="Kreiraj" method="post" class="row g-3">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="col-md-6">
+                <label asp-for="Ime" class="form-label"></label>
+                <input asp-for="Ime" class="form-control" />
+                <span asp-validation-for="Ime" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="Prezime" class="form-label"></label>
+                <input asp-for="Prezime" class="form-control" />
+                <span asp-validation-for="Prezime" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="Specijalizacija" class="form-label"></label>
+                <input asp-for="Specijalizacija" class="form-control" />
+                <span asp-validation-for="Specijalizacija" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-3">
+                <label asp-for="DatumZaposlenja" class="form-label"></label>
+                <input asp-for="DatumZaposlenja" type="date" class="form-control" />
+                <span asp-validation-for="DatumZaposlenja" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-3">
+                <label asp-for="SatnicaEUR" class="form-label"></label>
+                <input asp-for="SatnicaEUR" class="form-control" />
+                <span asp-validation-for="SatnicaEUR" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Radionica</label>
+                <select asp-for="RadionicaId" class="form-select js-ajax-autocomplete" asp-items="ViewBag.Radionice" data-autocomplete-url="@Url.Action("AutocompleteRadionice", "Mehanicar")" data-autocomplete-placeholder="Pretraži radionicu..."></select>
+                <span asp-validation-for="RadionicaId" class="text-danger"></span>
+            </div>
+
+            <div class="col-12 d-flex gap-2 pt-2">
+                <button type="submit" class="btn btn-primary">Spremi mehaničara</button>
+                <a asp-controller="Mehanicar" asp-action="Index" class="btn btn-outline-secondary">Odustani</a>
+            </div>
+        </form>
+    </div>
+</section>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

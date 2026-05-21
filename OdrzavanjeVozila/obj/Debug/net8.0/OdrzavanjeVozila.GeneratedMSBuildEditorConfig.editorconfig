@@ -8,6 +8,7 @@ build_property.ProjectTypeGuids =
 build_property.InvariantGlobalization = 
 build_property.PlatformNeutralAssembly = 
 build_property.EnforceExtendedAnalyzerRules = 
+build_property.EntryPointFilePath = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = OdrzavanjeVozila
 build_property.RootNamespace = OdrzavanjeVozila
@@ -30,12 +31,52 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0b21vYmlsXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Automobil/Kreiraj.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0b21vYmlsXEtyZWlyYWouY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Automobil/Obrisi.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0b21vYmlsXE9icmlzaS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Automobil/PoBenzinskoj.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0b21vYmlsXFBvQmVuemluc2tvai5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Automobil/Uredi.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0b21vYmlsXFVyZWRpLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Automobil/_Rows.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0b21vYmlsXF9Sb3dzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Dio/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlvXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Dio/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlvXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Dio/Kreiraj.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlvXEtyZWlyYWouY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Dio/Obrisi.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlvXE9icmlzaS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Dio/PrioCategory.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlvXFByaW9DYXRlZ29yeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Dio/Uredi.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlvXFVyZWRpLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Dio/_Rows.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlvXF9Sb3dzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Home/Index.cshtml]
@@ -54,12 +95,48 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS29yaXNuaWtcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Korisnik/Kreiraj.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS29yaXNuaWtcS3JlaXJhai5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Korisnik/Obrisi.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS29yaXNuaWtcT2JyaXNpLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Korisnik/Uredi.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS29yaXNuaWtcVXJlZGkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Korisnik/_Rows.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS29yaXNuaWtcX1Jvd3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Mehanicar/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVoYW5pY2FyXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Mehanicar/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVoYW5pY2FyXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Mehanicar/Kreiraj.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVoYW5pY2FyXEtyZWlyYWouY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Mehanicar/Obrisi.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVoYW5pY2FyXE9icmlzaS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Mehanicar/PorRadionica.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVoYW5pY2FyXFBvclJhZGlvbmljYS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Mehanicar/Uredi.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVoYW5pY2FyXFVyZWRpLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Mehanicar/_Rows.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVoYW5pY2FyXF9Sb3dzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Radionica/Details.cshtml]
@@ -70,12 +147,48 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFkaW9uaWNhXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Radionica/Kreiraj.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFkaW9uaWNhXEtyZWlyYWouY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Radionica/Obrisi.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFkaW9uaWNhXE9icmlzaS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Radionica/Uredi.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFkaW9uaWNhXFVyZWRpLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Radionica/_Rows.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFkaW9uaWNhXF9Sb3dzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/ServisniNalog/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmlzbmlOYWxvZ1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/ServisniNalog/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmlzbmlOYWxvZ1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/ServisniNalog/Kreiraj.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmlzbmlOYWxvZ1xLcmVpcmFqLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/ServisniNalog/Obrisi.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmlzbmlOYWxvZ1xPYnJpc2kuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/ServisniNalog/PriStatusu.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmlzbmlOYWxvZ1xQcmlTdGF0dXN1LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/ServisniNalog/Uredi.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmlzbmlOYWxvZ1xVcmVkaS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/ServisniNalog/_Rows.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmlzbmlOYWxvZ1xfUm93cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Dominik/Documents/GitHub/.NET/OdrzavanjeVozila/Views/Shared/Error.cshtml]

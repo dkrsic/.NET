@@ -194,8 +194,8 @@ namespace OdrzavanjeVozila.Migrations
                 columns: new[] { "Id", "Adresa", "DatumRegistracije", "Email", "Ime", "Prezime", "Telefon" },
                 values: new object[,]
                 {
-                    { 1, "Ilica 200, Zagreb", new DateTime(2025, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "marko@mail.com", "Marko", "Horvat", "099-1111111" },
-                    { 2, "Gunduliceva 50, Split", new DateTime(2025, 2, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "ana@mail.com", "Ana", "Novak", "099-2222222" }
+                    { 1, "Ilica 200, Zagreb", new DateTime(2025, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "marko.horvat@autosluzba.hr", "Marko", "Horvat", "+385 91 482 1163" },
+                    { 2, "Gunduliceva 50, Split", new DateTime(2025, 2, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "ana.novak@autosluzba.hr", "Ana", "Novak", "+385 91 637 2048" }
                 });
 
             migrationBuilder.InsertData(
@@ -203,8 +203,8 @@ namespace OdrzavanjeVozila.Migrations
                 columns: new[] { "Id", "Adresa", "Email", "Naziv", "Telefon" },
                 values: new object[,]
                 {
-                    { 1, "Ilica 100, Zagreb", "info@radionica-zg.hr", "Radionica Zagreb", "01-1234567" },
-                    { 2, "Marmontova 50, Split", "info@radionica-split.hr", "Radionica Split", "021-1234567" }
+                    { 1, "Ilica 100, Zagreb", "kontakt.zagreb@radionica-mreza.hr", "Radionica Zagreb", "+385 1 4829 615" },
+                    { 2, "Marmontova 50, Split", "kontakt.split@radionica-mreza.hr", "Radionica Split", "+385 21 784 392" }
                 });
 
             migrationBuilder.InsertData(

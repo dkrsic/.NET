@@ -1,0 +1,26 @@
+@model IEnumerable<OdrzavanjeVozila.Klase.Dio>
+
+@foreach (var dio in Model)
+{
+    var stockClass = dio.KolicinaNaSkladistu <= 0
+        ? "stock-empty"
+        : dio.KolicinaNaSkladistu < 5
+            ? "stock-low"
+            : "stock-good";
+
+    <tr>
+        <td>@dio.Naziv</td>
+        <td>@dio.KatalogBroj</td>
+        <td>@dio.Proizvodac</td>
+        <td>@dio.Kategorija</td>
+        <td>@dio.Cijena.ToString("N2") €</td>
+        <td><span class="stock-chip @stockClass">@dio.KolicinaNaSkladistu kom</span></td>
+        <td>
+            <a asp-controller="Dio" asp-action="Uredi" asp-route-id="@dio.Id">Uredi</a>
+            |
+            <a asp-controller="Dio" asp-action="Details" asp-route-id="@dio.Id">Detalji</a>
+            |
+            <a asp-controller="Dio" asp-action="Obrisi" asp-route-id="@dio.Id">Obriši</a>
+        </td>
+    </tr>
+}

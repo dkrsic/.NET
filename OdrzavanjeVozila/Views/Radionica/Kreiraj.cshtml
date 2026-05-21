@@ -1,0 +1,52 @@
+@model OdrzavanjeVozila.Models.RadionicaCreateModel
+@{
+    ViewData["Title"] = "Nova radionica";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb app-breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Početna</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Radionica" asp-action="Index">Radionice</a></li>
+        <li class="breadcrumb-item active">Nova radionica</li>
+    </ol>
+</nav>
+
+<section class="entity-shell">
+    <div class="entity-head"><h2>Dodaj radionicu</h2></div>
+    <div class="detail-card">
+        <form asp-action="Kreiraj" method="post" class="row g-3">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="col-md-6">
+                <label asp-for="Naziv" class="form-label"></label>
+                <input asp-for="Naziv" class="form-control" />
+                <span asp-validation-for="Naziv" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="Adresa" class="form-label"></label>
+                <input asp-for="Adresa" class="form-control" />
+                <span asp-validation-for="Adresa" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="Telefon" class="form-label"></label>
+                <input asp-for="Telefon" class="form-control" />
+                <span asp-validation-for="Telefon" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="col-12 d-flex gap-2 pt-2">
+                <button type="submit" class="btn btn-primary">Spremi radionicu</button>
+                <a asp-controller="Radionica" asp-action="Index" class="btn btn-outline-secondary">Odustani</a>
+            </div>
+        </form>
+    </div>
+</section>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

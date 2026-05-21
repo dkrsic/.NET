@@ -12,7 +12,18 @@
 
 <section class="entity-shell">
     <div class="entity-head">
-        <h2>Popis korisnika</h2>
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+            <div>
+                <h2>Popis korisnika</h2>
+            </div>
+            <a asp-controller="Korisnik" asp-action="Kreiraj" class="btn btn-primary">Novi korisnik</a>
+        </div>
+    </div>
+    <div class="row g-3 mb-3">
+        <div class="col-12 col-lg-6">
+            <label for="korisnikSearch" class="form-label visually-hidden">Pretraga korisnika</label>
+            <input id="korisnikSearch" type="search" class="form-control" placeholder="Pretraži ime, email, telefon ili adresu" autocomplete="off" data-search-url="@Url.Action("Pretrazi", "Korisnik")" />
+        </div>
     </div>
     <div class="table-responsive glass-table">
         <table class="table table-hover align-middle mb-0">
@@ -26,21 +37,32 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach (var korisnik in Model)
-                {
-                    <tr>
-                        <td>@korisnik.PunoIme</td>
-                        <td>@korisnik.Email</td>
-                        <td>@korisnik.Telefon</td>
-                        <td>@korisnik.Adresa</td>
-                        <td>@korisnik.DatumRegistracije.ToString("dd.MM.yyyy")</td>
-                        <td>
-                            <a asp-controller="Korisnik" asp-action="Details" asp-route-id="@korisnik.Id">Detalji</a>
-                        </td>
-                    </tr>
-                }
+            <tbody id="korisnikRows">
+                @await Html.PartialAsync("_Rows", Model)
             </tbody>
         </table>
     </div>
 </section>
+
+@section Scripts {
+    <script>
+        (function () {
+            const searchInput = document.getElementById('korisnikSearch');
+            const rowsTarget = document.getElementById('korisnikRows');
+            const searchUrl = searchInput.dataset.searchUrl;
+            let timer = null;
+
+            async function loadRows(query) {
+                const response = await fetch(`${searchUrl}?q=${encodeURIComponent(query)}`, {
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                });
+                rowsTarget.innerHTML = await response.text();
+            }
+
+            searchInput.addEventListener('input', function () {
+                clearTimeout(timer);
+                timer = setTimeout(() => loadRows(searchInput.value), 250);
+            });
+        })();
+    </script>
+}

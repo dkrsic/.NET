@@ -1,0 +1,18 @@
+@model IEnumerable<OdrzavanjeVozila.Klase.Radionica>
+
+@foreach (var radionica in Model)
+{
+    <tr>
+        <td>@radionica.Naziv</td>
+        <td>@radionica.Adresa</td>
+        <td>@radionica.Telefon</td>
+        <td>@radionica.Email</td>
+        <td>
+            <a asp-controller="Radionica" asp-action="Uredi" asp-route-id="@radionica.Id">Uredi</a>
+            |
+            <a asp-controller="Radionica" asp-action="Details" asp-route-id="@radionica.Id">Detalji</a>
+            |
+            <a asp-controller="Radionica" asp-action="Obrisi" asp-route-id="@radionica.Id">Obriši</a>
+        </td>
+    </tr>
+}

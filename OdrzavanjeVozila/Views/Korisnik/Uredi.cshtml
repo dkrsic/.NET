@@ -1,0 +1,72 @@
+@model OdrzavanjeVozila.Models.KorisnikEditModel
+@{
+    ViewData["Title"] = "Uredi korisnika";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb app-breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Početna</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Korisnik" asp-action="Index">Korisnici</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Korisnik" asp-action="Details" asp-route-id="@Model.Id">@Model.PunoIme</a></li>
+        <li class="breadcrumb-item active">Uredi</li>
+    </ol>
+</nav>
+
+<section class="entity-shell">
+    <div class="entity-head">
+        <h2>Uredi korisnika</h2>
+        <p class="text-secondary mb-0">Ažurirajte podatke za @Model.PunoIme.</p>
+    </div>
+
+    <div class="detail-card">
+        <form asp-action="Uredi" method="post" class="row g-3">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <div class="col-md-6">
+                <label asp-for="Ime" class="form-label"></label>
+                <input asp-for="Ime" class="form-control" />
+                <span asp-validation-for="Ime" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="Prezime" class="form-label"></label>
+                <input asp-for="Prezime" class="form-control" />
+                <span asp-validation-for="Prezime" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="Telefon" class="form-label"></label>
+                <input asp-for="Telefon" class="form-control" />
+                <span asp-validation-for="Telefon" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-12">
+                <label asp-for="Adresa" class="form-label"></label>
+                <input asp-for="Adresa" class="form-control" />
+                <span asp-validation-for="Adresa" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="DatumRegistracije" class="form-label"></label>
+                <input asp-for="DatumRegistracije" type="date" class="form-control" />
+                <span asp-validation-for="DatumRegistracije" class="text-danger"></span>
+            </div>
+
+            <div class="col-12 d-flex gap-2 pt-2">
+                <button type="submit" class="btn btn-primary">Spremi promjene</button>
+                <a asp-controller="Korisnik" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-secondary">Odustani</a>
+            </div>
+        </form>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

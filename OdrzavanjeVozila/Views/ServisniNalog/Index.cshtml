@@ -12,7 +12,18 @@
 
 <section class="entity-shell">
     <div class="entity-head">
-        <h2>Servisni nalozi</h2>
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+            <div>
+                <h2>Servisni nalozi</h2>
+            </div>
+            <a asp-controller="ServisniNalog" asp-action="Kreiraj" class="btn btn-primary">Novi servisni nalog</a>
+        </div>
+    </div>
+    <div class="row g-3 mb-3">
+        <div class="col-12 col-lg-6">
+            <label for="servisniNalogSearch" class="form-label visually-hidden">Pretraga servisnih naloga</label>
+            <input id="servisniNalogSearch" type="search" class="form-control" placeholder="Pretraži vozilo, mehaničara, status ili napomenu" autocomplete="off" data-search-url="@Url.Action("Pretrazi", "ServisniNalog")" />
+        </div>
     </div>
     <div class="table-responsive glass-table">
         <table class="table table-hover align-middle mb-0">
@@ -26,29 +37,32 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach (var nalog in Model)
-                {
-                    var statusText = nalog.Status.ToString();
-                    var statusKey = statusText.ToLowerInvariant();
-                    var statusClass = statusKey.Contains("zavr") || statusKey.Contains("dovr")
-                        ? "status-done"
-                        : statusKey.Contains("otvor") || statusKey.Contains("tijek")
-                            ? "status-progress"
-                            : "status-wait";
-
-                    <tr>
-                        <td>@nalog.DatumOtvaranja.ToString("dd.MM.yyyy")</td>
-                        <td>@(nalog.Automobil?.Naziv ?? "-")</td>
-                        <td>@(nalog.Mehanicar?.PunoIme ?? "-")</td>
-                        <td><span class="status-chip @statusClass">@statusText</span></td>
-                        <td>@nalog.UkupnaCijena.ToString("N2") €</td>
-                        <td>
-                            <a asp-controller="ServisniNalog" asp-action="Details" asp-route-id="@nalog.Id">Detalji</a>
-                        </td>
-                    </tr>
-                }
+            <tbody id="servisniNalogRows">
+                @await Html.PartialAsync("_Rows", Model)
             </tbody>
         </table>
     </div>
 </section>
+
+@section Scripts {
+    <script>
+        (function () {
+            const searchInput = document.getElementById('servisniNalogSearch');
+            const rowsTarget = document.getElementById('servisniNalogRows');
+            const searchUrl = searchInput.dataset.searchUrl;
+            let timer = null;
+
+            async function loadRows(query) {
+                const response = await fetch(`${searchUrl}?q=${encodeURIComponent(query)}`, {
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                });
+                rowsTarget.innerHTML = await response.text();
+            }
+
+            searchInput.addEventListener('input', function () {
+                clearTimeout(timer);
+                timer = setTimeout(() => loadRows(searchInput.value), 250);
+            });
+        })();
+    </script>
+}
