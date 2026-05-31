@@ -320,10 +320,21 @@
 
 			function formatForDisplay(iso) {
 				if (!iso) return '';
-				const d = new Date(iso);
+				// prefer parsing YYYY-MM-DDTHH:mm:ss (local) to avoid timezone conversions
+				const m = String(iso).match(/^(\d{4})-(\d{2})-(\d{2})(?:T(\d{2}):(\d{2})(?::(\d{2}))?)?/);
+				let d;
+				if (m) {
+					const y = Number(m[1]), mo = Number(m[2]) - 1, da = Number(m[3]);
+					const hh = Number(m[4] || 0), mm = Number(m[5] || 0);
+					d = new Date(y, mo, da, hh, mm);
+				} else {
+					d = new Date(iso);
+				}
 				if (isNaN(d)) return '';
 				return d.toLocaleString(userLocale);
 			}
+
+			function pad(n) { return String(n).padStart(2, '0'); }
 
 			function setDisplay() {
 				display.value = formatForDisplay(hidden.value);
@@ -393,7 +404,7 @@
 							if (selectedDay === d) btn.classList.add('active');
 							btn.addEventListener('click', function () {
 								selectedDate = new Date(year, month, d);
-								dateText.value = selectedDate.toISOString().slice(0, 10);
+								dateText.value = selectedDate.getFullYear() + '-' + pad(selectedDate.getMonth() + 1) + '-' + pad(selectedDate.getDate());
 								// highlight selection
 								Array.from(grid.querySelectorAll('button')).forEach(b => b.classList.remove('active'));
 								btn.classList.add('active');
@@ -416,11 +427,24 @@
 					// initialize values
 					let selectedDate = null;
 					if (hidden.value) {
-						const d = new Date(hidden.value);
-						if (!isNaN(d)) {
-							selectedDate = d;
-							dateText.value = d.toISOString().slice(0, 10);
-							timeInput.value = d.toISOString().slice(11, 16);
+						// prefer parsing YYYY-MM-DDTHH:mm:ss (local) format to avoid timezone shifts
+						const m = hidden.value.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(?::(\d{2}))?/);
+						if (m) {
+							const y = Number(m[1]), mo = Number(m[2]) - 1, da = Number(m[3]);
+							const hh = Number(m[4] || 0), mm = Number(m[5] || 0);
+							const d = new Date(y, mo, da, hh, mm);
+							if (!isNaN(d)) {
+								selectedDate = d;
+								dateText.value = m[1] + '-' + m[2] + '-' + m[3];
+								timeInput.value = pad(hh) + ':' + pad(mm);
+							}
+						} else {
+							const d = new Date(hidden.value);
+							if (!isNaN(d)) {
+								selectedDate = d;
+								dateText.value = d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+								timeInput.value = pad(d.getHours()) + ':' + pad(d.getMinutes());
+							}
 						}
 					}
 					const now = selectedDate || new Date();
@@ -444,7 +468,10 @@
 						const parts = dateText.value.split('-').map(Number);
 						const timeParts = (timeInput.value || '00:00').split(':').map(Number);
 						const dt = new Date(parts[0], parts[1] - 1, parts[2], timeParts[0] || 0, timeParts[1] || 0);
-						hidden.value = new Date(dt.getTime()).toISOString();
+						// store as local ISO-like string without timezone (match server-side "s" format)
+						function pad(n) { return String(n).padStart(2, '0'); }
+						const localIso = parts[0] + '-' + pad(parts[1]) + '-' + pad(parts[2]) + 'T' + pad(timeParts[0] || 0) + ':' + pad(timeParts[1] || 0) + ':00';
+						hidden.value = localIso;
 						setDisplay();
 						panel.classList.add('d-none');
 					});
